@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>phdev — Pedro Hammes · Sites & Landing Pages orientados a conversão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --grafite:#0A0A0A;
+    --ardosia:#5A5A5A;
+    --indigo:#111111;
+    --violeta:#000000;
+    --ameixa:#141414;
+    --violeta-claro:#9A9A9A;
+    --nevoa:#E6E6E6;
+    --papel:#F5F5F5;
+    --branco:#FFFFFF;
+    --verde:#00C566;
+
+    --display:'Space Grotesk',sans-serif;
+    --body:'Inter',sans-serif;
+    --script:'Caveat',cursive;
+
+    --maxw:1140px;
+    --gap:clamp(72px,10vw,140px);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body);
+    background:var(--papel);
+    color:var(--grafite);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .serv-note {
+  font-size: .82rem;
+  line-height: 1.4;
+  color: #666;
+  border-left: 2px solid var(--green, #1db954);
+  padding-left: .75rem;
+  margin: .5rem 0 1rem;
+  }
+  ::selection{background:var(--indigo);color:#fff}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  section{padding:var(--gap) 0}
+
+  h1,h2,h3,.num{font-family:var(--display);letter-spacing:-.02em;line-height:1.05}
+  .script{font-family:var(--script);font-weight:600;color:var(--indigo);letter-spacing:0}
+
+  .eyebrow{
+    font-family:var(--display);
+    font-size:.72rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--indigo);display:inline-flex;align-items:center;gap:10px;margin-bottom:22px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1.5px;background:var(--indigo);display:inline-block}
+
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    font-family:var(--display);font-weight:600;font-size:.98rem;
+    display:inline-flex;align-items:center;gap:10px;
+    padding:16px 30px;border-radius:12px;border:none;cursor:pointer;
+    text-decoration:none;transition:.25s cubic-bezier(.4,0,.2,1);
+  }
+  .btn-primary{background:var(--indigo);color:#fff;box-shadow:0 8px 24px -8px rgba(0,0,0,.28)}
+  .btn-primary:hover{background:var(--violeta);transform:translateY(-2px);box-shadow:0 14px 32px -8px rgba(0,0,0,.35)}
+  .btn-ghost{background:transparent;color:var(--grafite);border:1.5px solid var(--nevoa)}
+  .btn-ghost:hover{border-color:var(--indigo);color:var(--indigo)}
+  .btn-arrow{transition:transform .25s}
+  .btn:hover .btn-arrow{transform:translateX(4px)}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(248,247,252,.82);backdrop-filter:blur(14px);
+    border-bottom:1px solid transparent;transition:border-color .3s;
+  }
+  header.scrolled{border-bottom:1px solid var(--nevoa)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .logo{font-family:var(--display);font-weight:700;font-size:1.4rem;letter-spacing:-.03em;text-decoration:none}
+  .logo .ph{color:var(--indigo)}
+  .logo .dev{color:var(--grafite)}
+  .nav-links{display:flex;align-items:center;gap:34px}
+  .nav-links a{text-decoration:none;color:var(--ardosia);font-size:.94rem;font-weight:500;transition:color .2s}
+  .nav-links a:hover{color:var(--grafite)}
+  .nav-cta{font-family:var(--display);font-weight:600;font-size:.9rem;background:var(--grafite);color:#fff!important;padding:11px 22px;border-radius:10px;transition:.25s}
+  .nav-cta:hover{background:var(--indigo)}
+  .menu-btn{display:none;background:none;border:none;cursor:pointer;font-size:1.6rem;color:var(--grafite)}
+
+  /* ---------- HERO ---------- */
+  .hero{padding-top:clamp(56px,8vw,96px);position:relative}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+  .hero h1{font-size:clamp(2.5rem,5.4vw,4.1rem);font-weight:700;margin-bottom:26px}
+  .hero h1 em{font-style:normal;font-family:var(--script);color:var(--indigo);font-weight:700;font-size:1.15em}
+  .hero-sub{font-size:1.14rem;color:var(--ardosia);max-width:34ch;margin-bottom:36px}
+  .hero-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+  .hero-micro{font-size:.88rem;color:var(--ardosia);margin-top:20px;display:flex;align-items:center;gap:8px}
+  .hero-micro::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--indigo);box-shadow:0 0 0 4px rgba(0,0,0,.12)}
+
+  /* metric card — the signature */
+  .metric-card{
+    background:var(--ameixa);border-radius:22px;padding:40px 38px;color:#fff;position:relative;overflow:hidden;
+    box-shadow:0 30px 60px -24px rgba(0,0,0,.5);
+  }
+  .metric-card::before{
+    content:"";position:absolute;top:-40%;right:-30%;width:70%;height:120%;
+    background:radial-gradient(circle,rgba(255,255,255,.14),transparent 68%);
+  }
+  .metric-tag{font-family:var(--display);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--violeta-claro);position:relative}
+  .metric-num{font-family:var(--display);font-weight:700;font-size:clamp(3.6rem,8vw,5.2rem);line-height:1;margin:14px 0 6px;position:relative}
+  .metric-num small{font-size:.42em;vertical-align:super;color:var(--violeta-claro)}
+  .metric-desc{font-size:.96rem;color:rgba(255,255,255,.74);position:relative;max-width:26ch}
+  .metric-divider{height:1px;background:rgba(255,255,255,.12);margin:26px 0;position:relative}
+  .metric-mini{display:flex;gap:30px;position:relative}
+  .metric-mini div span{display:block}
+  .metric-mini .mv{font-family:var(--display);font-weight:600;font-size:1.5rem;color:#fff}
+  .metric-mini .ml{font-size:.76rem;color:rgba(255,255,255,.6)}
+  .metric-foot{display:block;position:relative;margin-top:22px;font-size:.72rem;color:rgba(255,255,255,.42);font-style:italic}
+
+  /* ---------- DOR ---------- */
+  .dor{background:var(--branco);border-block:1px solid var(--nevoa)}
+  .dor-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+  .dor h2{font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:700}
+  .dor h2 .hl{color:var(--indigo)}
+  .dor p{color:var(--ardosia);font-size:1.06rem;margin-top:22px}
+  .dor p em{font-style:italic;color:var(--grafite)}
+  .dor-visual{background:var(--papel);border:1px solid var(--nevoa);border-radius:18px;padding:34px}
+  .dor-line{display:flex;align-items:center;gap:16px;padding:15px 0;border-bottom:1px dashed var(--nevoa)}
+  .dor-line:last-child{border:none}
+  .dor-x,.dor-check{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-family:var(--display);font-weight:700;flex-shrink:0;font-size:.9rem}
+  .dor-x{background:#EAEAEA;color:#555555}
+  .dor-check{background:rgba(0,0,0,.10);color:var(--indigo)}
+  .dor-line span{font-size:.98rem}
+  .dor-line.off span{color:#9A9A9A;text-decoration:line-through;text-decoration-color:#CCCCCC}
+
+  /* ---------- SECTION HEADER ---------- */
+  .sec-head{max-width:52ch;margin-bottom:56px}
+  .sec-head h2{font-size:clamp(1.9rem,3.8vw,2.8rem);font-weight:700;margin-top:4px}
+  .sec-head p{color:var(--ardosia);font-size:1.08rem;margin-top:18px}
+
+  /* ---------- SERVIÇOS ---------- */
+  .serv-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  .serv-card{
+    background:var(--branco);border:1px solid var(--nevoa);border-radius:20px;padding:40px 36px;
+    transition:.3s;position:relative;overflow:hidden;
+  }
+  .serv-card:hover{transform:translateY(-4px);border-color:var(--violeta-claro);box-shadow:0 22px 44px -20px rgba(0,0,0,.18)}
+  .serv-card::after{content:"";position:absolute;left:0;top:0;height:100%;width:4px;background:var(--indigo);transform:scaleY(0);transform-origin:top;transition:transform .3s}
+  .serv-card:hover::after{transform:scaleY(1)}
+  .serv-idx{font-family:var(--display);font-weight:600;font-size:.8rem;color:var(--violeta-claro);letter-spacing:.1em}
+  .serv-card h3{font-size:1.4rem;font-weight:600;margin:16px 0 14px}
+  .serv-card p{color:var(--ardosia);font-size:1rem}
+  .serv-card .best{margin-top:20px;font-size:.86rem;color:var(--indigo);font-weight:500;font-family:var(--body)}
+  .serv-grid-3{grid-template-columns:repeat(3,1fr)}
+  .serv-card{display:flex;flex-direction:column}
+  .serv-feats{list-style:none;margin:22px 0 4px;padding:0;display:flex;flex-direction:column;gap:10px}
+  .serv-feats li{position:relative;padding-left:24px;font-size:.94rem;color:var(--ardosia);line-height:1.45}
+  .serv-feats li::before{content:"✓";position:absolute;left:0;top:0;color:var(--indigo);font-family:var(--display);font-weight:700;font-size:.85rem}
+  .serv-price{margin-top:24px;padding-top:20px;border-top:1px solid var(--nevoa);display:flex;flex-direction:column;gap:2px}
+  .serv-price-label{font-family:var(--display);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--violeta-claro)}
+  .serv-price-val{font-family:var(--display);font-weight:700;font-size:1.75rem;color:var(--grafite);letter-spacing:-.02em}
+  .serv-price-val small{font-size:.62em;font-weight:600;color:var(--ardosia)}
+  .serv-card .best{margin-top:auto;padding-top:18px}
+  .serv-card-hl{background:var(--ameixa);border-color:var(--ameixa);box-shadow:0 24px 50px -22px rgba(0,0,0,.5)}
+  .serv-card-hl::after{background:var(--violeta-claro)}
+  .serv-card-hl .serv-idx{color:var(--violeta-claro)}
+  .serv-card-hl h3{color:#fff}
+  .serv-card-hl>p{color:rgba(255,255,255,.72)}
+  .serv-card-hl .serv-feats li{color:rgba(255,255,255,.8)}
+  .serv-card-hl .serv-feats li::before{color:var(--violeta-claro)}
+  .serv-card-hl .serv-price{border-top-color:rgba(255,255,255,.14)}
+  .serv-card-hl .serv-price-val{color:#fff}
+  .serv-card-hl .serv-price-val small{color:var(--violeta-claro)}
+  .serv-card-hl .best{color:var(--violeta-claro)}
+  .serv-card-hl:hover{border-color:var(--violeta-claro)}
+  .serv-badge{position:absolute;top:20px;right:20px;background:var(--indigo);color:#fff;font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.06em;padding:6px 12px;border-radius:20px}
+  /* --- planos: novos elementos --- */
+  .sec-head h2 em{font-style:normal;font-family:var(--script);color:var(--indigo);font-size:1.15em}
+  .serv-promise{font-family:var(--display);font-size:1.02rem;font-weight:500;color:var(--grafite);margin-bottom:16px;line-height:1.4}
+  .serv-for{font-size:.9rem;color:var(--ardosia);margin-bottom:22px;padding-bottom:20px;border-bottom:1px solid var(--nevoa)}
+  .serv-for strong{color:var(--grafite);font-weight:600}
+  .serv-feats-label{font-family:var(--display);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--violeta-claro);display:block;margin-bottom:14px}
+  .serv-feats li strong{color:var(--grafite);font-weight:600}
+  .serv-cta{width:100%;justify-content:center;margin-top:20px;font-size:.9rem;padding:14px 20px}
+  .serv-card-hl .serv-promise{color:#fff}
+  .serv-card-hl .serv-for{color:rgba(255,255,255,.7);border-bottom-color:rgba(255,255,255,.14)}
+  .serv-card-hl .serv-for strong{color:#fff}
+  .serv-card-hl .serv-feats li strong{color:#fff}
+  .serv-card-hl .btn-ghost{border-color:rgba(255,255,255,.3);color:#fff}
+
+  /* --- tabela comparativa --- */
+  .plans-compare{margin-top:48px}
+  /* acordeão das tabelas comparativas */
+  .compare-details{border:1px solid var(--nevoa);border-radius:14px;background:var(--branco);overflow:hidden}
+  .compare-summary{
+    list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+    gap:16px;padding:20px 26px;font-family:var(--display);font-size:1.02rem;font-weight:600;
+    color:var(--grafite);transition:background .2s;
+  }
+  .compare-summary::-webkit-details-marker{display:none}
+  .compare-summary:hover{background:var(--papel)}
+  .compare-summary:focus-visible{outline:2px solid var(--verde);outline-offset:-2px}
+  .compare-chevron{display:grid;place-items:center;width:26px;height:26px;color:var(--ardosia);flex-shrink:0;transition:transform .3s cubic-bezier(.4,0,.2,1)}
+  .compare-chevron svg{width:18px;height:18px}
+  .compare-details[open] .compare-chevron{transform:rotate(180deg)}
+  .compare-body{padding:0 26px 26px;animation:compareIn .35s cubic-bezier(.2,.7,.2,1)}
+  @keyframes compareIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+  .compare-note{margin-top:16px;font-size:.86rem;color:var(--ardosia);line-height:1.5}
+  @media(prefers-reduced-motion:reduce){.compare-body{animation:none}.compare-chevron{transition:none}}
+  @media(max-width:560px){.compare-summary{padding:18px 18px;font-size:.94rem}.compare-body{padding:0 18px 20px}}
+
+  .plans-compare-title{font-family:var(--display);font-size:clamp(1.5rem,2.8vw,2rem);font-weight:700;letter-spacing:-.02em;text-align:center;margin-bottom:32px}
+  .plans-table-wrap{overflow-x:auto;border:1px solid var(--nevoa);border-radius:18px;background:var(--branco)}
+  .plans-table{width:100%;border-collapse:collapse;min-width:640px}
+  .plans-table th,.plans-table td{padding:16px 20px;text-align:left;font-size:.94rem;border-bottom:1px solid var(--nevoa)}
+  .plans-table thead th{font-family:var(--display);font-weight:600;font-size:1rem;color:var(--grafite);background:var(--papel)}
+  .plans-table tbody td:first-child{color:var(--ardosia);font-weight:500}
+  .plans-table .pt-hl{background:rgba(0,0,0,.04)}
+  .plans-table thead .pt-hl{color:var(--indigo)}
+  .plans-table tbody tr:last-child td{border-bottom:none}
+  .pt-yes{color:var(--indigo);font-weight:600}
+  .pt-price-row td{font-family:var(--display);font-weight:700;font-size:1.05rem;color:var(--grafite)}
+
+  /* --- ainda em dúvida --- */
+  .plans-help{margin-top:56px;text-align:center}
+  .plans-help h3{font-family:var(--display);font-size:1.5rem;font-weight:700;letter-spacing:-.02em;margin-bottom:28px}
+  .plans-help-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;text-align:left}
+  .plans-help-item{background:var(--branco);border:1px solid var(--nevoa);border-radius:16px;padding:26px 24px}
+  .ph-tag{font-family:var(--display);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--indigo);font-weight:600;display:block;margin-bottom:10px}
+  .plans-help-item p{color:var(--ardosia);font-size:.95rem}
+  .plans-help-close{margin-top:32px;font-family:var(--display);font-size:1.06rem;font-weight:500;color:var(--grafite);max-width:60ch;margin-left:auto;margin-right:auto}
+
+  .serv-note{text-align:center;color:var(--ardosia);font-size:.9rem;margin-top:32px;max-width:56ch;margin-left:auto;margin-right:auto}
+
+  /* ---------- DIFERENCIAIS ---------- */
+  .dif{background:var(--grafite);color:#fff;border-radius:32px;margin:0 auto;max-width:calc(var(--maxw) + 56px)}
+  .dif-inner{padding:clamp(56px,7vw,88px) clamp(28px,5vw,64px)}
+  .dif .eyebrow{color:var(--violeta-claro)}
+  .dif .eyebrow::before{background:var(--violeta-claro)}
+  .dif h2{font-size:clamp(1.9rem,3.8vw,2.8rem);font-weight:700;max-width:20ch;margin-bottom:56px}
+  .dif h2 em{font-style:normal;font-family:var(--script);color:var(--violeta-claro);font-size:1.1em}
+  .dif-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:rgba(255,255,255,.08);border-radius:18px;overflow:hidden}
+  .dif-item{background:var(--grafite);padding:38px 34px;transition:background .3s}
+  .dif-item:hover{background:#151830}
+  .dif-mark{color:#FFFFFF;width:46px;height:46px;border:1.5px solid rgba(255,255,255,.14);border-radius:12px;display:grid;place-items:center;margin-bottom:22px;transition:border-color .3s,background .3s}
+  .dif-item:hover .dif-mark{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.04)}
+  .dif-icon{width:21px;height:21px;display:block;color:#FFFFFF}
+  .dif-icon path,.dif-icon circle,.dif-icon polyline,.dif-icon line,.dif-icon rect{stroke:#FFFFFF}
+  /* acento verde pontual — só em números-herói e ícones animados */
+  .num-flash{color:var(--verde)}
+  /* pulso suave — indicador visual nos números de tráfego */
+  @keyframes pulseGreen{
+    0%,100%{color:var(--grafite)}
+    50%{color:var(--verde)}
+  }
+  .num-live{animation:pulseGreen 2.8s ease-in-out infinite}
+  .num-live-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--verde);margin-left:7px;vertical-align:middle;animation:dotPulse 2.8s ease-in-out infinite}
+  @keyframes dotPulse{0%,100%{opacity:.35;transform:scale(.85)}50%{opacity:1;transform:scale(1)}}
+  @media(prefers-reduced-motion:reduce){.num-live,.num-live-dot{animation:none}}
+  .dif-item h3{font-size:1.22rem;font-weight:600;margin-bottom:12px}
+  .dif-item p{color:rgba(255,255,255,.66);font-size:.98rem}
+
+  /* ---------- PORTFÓLIO / CASES ---------- */
+  .case-list{display:flex;flex-direction:column;gap:34px}
+  .case{
+    display:grid;grid-template-columns:1fr 1fr;gap:0;
+    background:var(--branco);border:1px solid var(--nevoa);border-radius:22px;overflow:hidden;
+    transition:.3s;
+  }
+  .case:hover{box-shadow:0 30px 60px -24px rgba(0,0,0,.38);border-color:rgba(0,197,102,.35)}
+  /* hover: a moldura "acorda" */
+  .case-img{transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s cubic-bezier(.2,.7,.2,1)}
+  .case:hover .case-img{transform:translateY(-6px);box-shadow:0 26px 52px -14px rgba(0,0,0,.65), 0 0 0 1px rgba(0,197,102,.22)}
+  .case-img img{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+  .case:hover .case-img img{transform:scale(1.04)}
+  @media(prefers-reduced-motion:reduce){
+    .case-img,.case-img img{transition:none}
+    .case:hover .case-img{transform:none}
+    .case:hover .case-img img{transform:none}
+  }
+  .case-cover{
+    position:relative;min-height:340px;
+    background:linear-gradient(150deg,#1F1F1F,#000000);
+    display:flex;flex-direction:column;justify-content:center;gap:26px;
+    overflow:hidden;padding:32px;
+  }
+  .case-cover::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 25%,rgba(255,255,255,.16),transparent 60%);pointer-events:none}
+  /* moldura 16:9 simulando a tela de um notebook */
+  .case-img{
+    position:relative;z-index:2;display:block;width:100%;aspect-ratio:16/9;
+    border-radius:10px;overflow:hidden;background:#000;
+    box-shadow:0 18px 40px -12px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.09);
+  }
+  .case-img img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+  .case-cover:has(.case-img)::after{background:radial-gradient(circle at 70% 20%,rgba(255,255,255,.10),transparent 65%)}
+  .case-cover-ph{position:relative;font-family:var(--display);font-size:.86rem;color:rgba(255,255,255,.62);letter-spacing:.04em;border:1.5px dashed rgba(255,255,255,.3);padding:14px 22px;border-radius:12px;text-align:center;max-width:70%}
+  .case-type{display:inline-block;margin-bottom:14px;background:var(--papel);border:1px solid var(--nevoa);color:var(--ardosia);font-family:var(--display);font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:6px 13px;border-radius:20px}
+  .case-body{padding:clamp(32px,4vw,46px);display:flex;flex-direction:column}
+  .case-reverse .case-cover{order:2}
+  .case-title{font-family:var(--display);font-size:1.6rem;font-weight:700;letter-spacing:-.02em;margin-bottom:14px}
+  .case-desc{color:var(--ardosia);font-size:1rem;margin-bottom:28px}
+  .case-metrics{display:flex;gap:18px;position:relative;z-index:2;padding-top:24px;border-top:1px solid rgba(255,255,255,.15)}
+  .case-metric{flex:1;display:flex;flex-direction:column;gap:4px}
+  .case-metric .cm-val{font-family:var(--display);font-weight:700;font-size:1.65rem;color:rgba(255,255,255,.94);letter-spacing:-.02em;line-height:1}
+  .case-metric .cm-val small{font-size:.55em;color:var(--violeta-claro);vertical-align:super}
+  .case-metric .cm-label{font-size:.73rem;color:rgba(255,255,255,.6);line-height:1.3}
+  .case-metric-hero .cm-val{font-size:2rem}
+  .case-quote{
+    position:relative;padding-left:20px;border-left:3px solid var(--violeta-claro);
+    font-size:1.02rem;color:var(--grafite);font-style:italic;line-height:1.5;
+  }
+  .case-visit{
+    align-self:flex-start;margin-top:auto;
+    display:inline-flex;align-items:center;gap:9px;margin-top:22px;
+    font-family:var(--display);font-size:.9rem;font-weight:600;
+    color:var(--grafite);text-decoration:none;
+    padding:11px 18px;border:1.5px solid var(--nevoa);border-radius:10px;
+    transition:border-color .25s,color .25s,transform .25s,background .25s;
+  }
+  .case-visit svg{width:15px;height:15px;flex-shrink:0;transition:transform .25s}
+  .case-visit:hover{border-color:var(--verde);color:var(--verde);background:rgba(0,197,102,.05)}
+  .case-visit:hover svg{transform:translate(2px,-2px)}
+  .case-visit:focus-visible{outline:2px solid var(--verde);outline-offset:2px}
+  .case-quote cite{display:block;margin-top:10px;font-style:normal;font-size:.86rem;color:var(--ardosia);font-weight:500}
+  .case-note{text-align:center;color:var(--ardosia);font-size:.84rem;font-style:italic;margin-top:30px}
+  .case-cta{text-align:center;margin-top:40px}
+
+  /* ---------- PLANOS DE PERFORMANCE ---------- */
+  .perf{background:var(--branco);border-block:1px solid var(--nevoa)}
+  .perf-optional{margin-top:16px;font-size:.98rem;color:var(--ardosia);padding-left:18px;border-left:3px solid var(--violeta-claro)}
+  .serv-deadline{margin-top:20px;padding-top:18px;border-top:1px solid var(--nevoa);font-family:var(--display);font-size:.82rem;font-weight:600;color:var(--ardosia)}
+  .serv-card-hl .serv-deadline{border-top-color:rgba(255,255,255,.14);color:rgba(255,255,255,.75)}
+  .serv-card .serv-price{margin-top:14px;padding-top:14px;border-top:none}
+  .serv-note-hl{margin-top:18px;padding:16px 18px;background:rgba(255,255,255,.08);border-radius:12px;font-size:.9rem;color:rgba(255,255,255,.85);line-height:1.5}
+  .pt-no{color:var(--ardosia);opacity:.5}
+
+  /* ---------- ABAS (Projetos / Planos) ---------- */
+  .tabs-head{margin-bottom:52px}
+  .tabs-nav{position:relative;display:inline-flex;gap:4px;background:var(--branco);border:1px solid var(--nevoa);border-radius:14px;padding:5px}
+  .tab-btn{
+    position:relative;z-index:2;background:none;border:none;cursor:pointer;
+    font-family:var(--display);font-size:1rem;font-weight:600;color:var(--ardosia);
+    padding:13px 26px;border-radius:10px;display:flex;flex-direction:column;gap:2px;
+    line-height:1.2;transition:color .25s;text-align:left;
+  }
+  .tab-btn-sub{font-family:var(--body);font-size:.74rem;font-weight:400;opacity:.75;letter-spacing:0}
+  .tab-btn:hover{color:var(--grafite)}
+  .tab-btn.is-active{color:var(--branco)}
+  .tab-btn:focus-visible{outline:2px solid var(--verde);outline-offset:3px}
+  .tab-indicator{
+    position:absolute;z-index:1;top:5px;left:5px;height:calc(100% - 10px);
+    background:var(--grafite);border-radius:10px;
+    transition:transform .32s cubic-bezier(.4,0,.2,1),width .32s cubic-bezier(.4,0,.2,1);
+  }
+  .tabs-hint{margin-top:18px;font-size:.9rem;color:var(--ardosia);max-width:60ch}
+  .tab-panel[hidden]{display:none}
+  .tab-panel{animation:tabIn .4s cubic-bezier(.2,.7,.2,1)}
+  @keyframes tabIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){.tab-panel{animation:none}.tab-indicator{transition:none}}
+  @media(max-width:560px){
+    .tabs-nav{display:flex;width:100%}
+    .tab-btn{flex:1;padding:12px 14px;font-size:.92rem}
+    .tab-btn-sub{font-size:.68rem}
+  }
+
+  /* ---------- ENTREGA / SEO ---------- */
+  .seo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .seo-card{background:var(--branco);border:1px solid var(--nevoa);border-radius:18px;padding:32px 26px;transition:.3s;position:relative;overflow:hidden}
+  .seo-card:hover{transform:translateY(-4px);border-color:var(--violeta-claro);box-shadow:0 20px 42px -22px rgba(0,0,0,.16)}
+  .seo-idx{font-family:var(--display);font-weight:700;font-size:1.6rem;color:var(--violeta-claro);display:block;margin-bottom:16px;letter-spacing:-.02em}
+  .seo-card h3{font-family:var(--display);font-size:1.16rem;font-weight:600;margin-bottom:12px;letter-spacing:-.01em}
+  .seo-card p{color:var(--ardosia);font-size:.95rem}
+  .seo-note{text-align:center;color:var(--ardosia);font-size:.86rem;font-style:italic;margin-top:32px;max-width:64ch;margin-left:auto;margin-right:auto}
+
+  /* ---------- PERSONALIZAÇÃO ---------- */
+  .pers{background:var(--branco);border-block:1px solid var(--nevoa)}
+  .pers-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .pers-copy h2{font-size:clamp(1.9rem,3.8vw,2.7rem);font-weight:700;letter-spacing:-.02em;margin-bottom:22px}
+  .pers-copy h2 em{font-style:normal;font-family:var(--script);color:var(--indigo);font-size:1.15em}
+  .pers-copy p{color:var(--ardosia);font-size:1.06rem;margin-bottom:18px}
+  .pers-signature{color:var(--grafite)!important;font-size:1rem!important;padding-left:20px;border-left:3px solid var(--violeta-claro)}
+  .pers-steps{display:flex;flex-direction:column;gap:2px;background:var(--nevoa);border-radius:18px;overflow:hidden}
+  .pers-step{background:var(--papel);padding:28px 30px;transition:background .3s}
+  .pers-step:hover{background:#fff}
+  .pers-step-n{font-family:var(--display);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--indigo);font-weight:600}
+  .pers-step h3{font-family:var(--display);font-size:1.24rem;font-weight:600;margin:8px 0 10px;letter-spacing:-.01em}
+  .pers-step p{color:var(--ardosia);font-size:.97rem}
+
+  /* ---------- SOBRE ---------- */
+  .sobre-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:center}
+  .sobre-photo{
+    aspect-ratio:4/5;background:linear-gradient(150deg,#1F1F1F,#000000);
+    border-radius:22px;position:relative;overflow:hidden;display:grid;place-items:center;
+    box-shadow:0 30px 60px -28px rgba(0,0,0,.55);
+  }
+  .sobre-photo .mono{font-family:var(--display);font-weight:700;font-size:6rem;color:rgba(255,255,255,.9);letter-spacing:-.05em}
+  .sobre-photo .ph-note{position:absolute;bottom:22px;font-family:var(--body);font-size:.78rem;color:rgba(255,255,255,.6)}
+  .sobre-photo::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.16),transparent 60%)}
+  .sobre-name{font-family:var(--script);font-size:2.6rem;color:var(--indigo);line-height:1;margin-bottom:6px}
+  .sobre-role{font-family:var(--display);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ardosia);margin-bottom:26px}
+  .sobre-grid p{color:var(--ardosia);font-size:1.08rem;margin-bottom:18px}
+  .sobre-grid p strong{color:var(--grafite);font-weight:600}
+
+  /* ---------- PROCESSO ---------- */
+  .proc{background:var(--branco);border-block:1px solid var(--nevoa)}
+  .proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:12px;counter-reset:step}
+  .proc-step{position:relative;padding-top:32px}
+  .proc-step::before{
+    counter-increment:step;content:"0" counter(step);
+    font-family:var(--display);font-weight:700;font-size:.9rem;color:var(--indigo);
+    position:absolute;top:0;left:0;
+  }
+  .proc-step::after{content:"";position:absolute;top:6px;left:34px;right:-12px;height:1px;background:var(--nevoa)}
+  .proc-step:last-child::after{display:none}
+  .proc-step h3{font-size:1.14rem;font-weight:600;margin-bottom:10px}
+  .proc-step p{color:var(--ardosia);font-size:.96rem}
+
+  /* ---------- FAQ ---------- */
+  .faq-grid{display:grid;grid-template-columns:.62fr 1fr;gap:56px;align-items:start}
+  .faq-list{border-top:1px solid var(--nevoa)}
+  .faq-item{border-bottom:1px solid var(--nevoa)}
+  .faq-q{
+    width:100%;background:none;border:none;cursor:pointer;text-align:left;
+    font-family:var(--display);font-weight:600;font-size:1.1rem;color:var(--grafite);
+    padding:24px 44px 24px 0;position:relative;display:flex;
+  }
+  .faq-q::after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:1.5rem;color:var(--indigo);transition:transform .3s;font-family:var(--display)}
+  .faq-item.open .faq-q::after{transform:translateY(-50%) rotate(45deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s ease}
+  .faq-a p{color:var(--ardosia);font-size:1rem;padding-bottom:0}
+  .faq-item.open .faq-a{max-height:340px}
+  .faq-item.open .faq-a p{padding-bottom:26px}
+
+  /* ---------- FORM ---------- */
+  .form-sec{background:var(--ameixa);color:#fff;position:relative;overflow:hidden}
+  .form-sec::before{content:"";position:absolute;top:-20%;left:-10%;width:50%;height:140%;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 65%)}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative}
+  .form-copy .eyebrow{color:var(--violeta-claro)}
+  .form-copy .eyebrow::before{background:var(--violeta-claro)}
+  .form-copy h2{font-size:clamp(2rem,4vw,3rem);font-weight:700;margin-bottom:20px}
+  .form-copy h2 em{font-style:normal;font-family:var(--script);color:var(--violeta-claro);font-size:1.1em}
+  .form-copy p{color:rgba(255,255,255,.72);font-size:1.08rem;max-width:34ch}
+  .form-alt{margin-top:34px;display:flex;align-items:center;gap:12px;font-size:.96rem;color:rgba(255,255,255,.72)}
+  .form-alt a{color:#fff;font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--violeta-claro);padding-bottom:2px}
+  .form-alt a:hover{color:var(--violeta-claro)}
+  .form-card{background:var(--branco);border-radius:22px;padding:38px 34px;box-shadow:0 40px 80px -30px rgba(0,0,0,.5)}
+  .field{margin-bottom:20px}
+  .field label{display:block;font-family:var(--display);font-size:.82rem;font-weight:600;color:var(--grafite);margin-bottom:8px}
+  .field input,.field select{
+    width:100%;font-family:var(--body);font-size:1rem;color:var(--grafite);
+    padding:14px 16px;border:1.5px solid var(--nevoa);border-radius:11px;background:var(--papel);transition:.2s;
+  }
+  .field input:focus,.field select:focus{outline:none;border-color:var(--indigo);background:#fff;box-shadow:0 0 0 4px rgba(0,0,0,.10)}
+  .field .opt{font-weight:400;color:var(--ardosia);font-size:.76rem}
+  .form-card .btn-primary{width:100%;justify-content:center;margin-top:6px}
+  .form-micro{text-align:center;font-size:.84rem;color:var(--ardosia);margin-top:16px}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--grafite);color:#fff;padding:64px 0 40px}
+  .foot-top{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.1)}
+  .foot-brand .logo{font-size:1.6rem}
+  .foot-brand p{color:rgba(255,255,255,.55);font-size:.94rem;margin-top:12px;max-width:30ch}
+  .foot-tag{font-family:var(--script);color:var(--violeta-claro);font-size:1.5rem;margin-top:8px}
+  .foot-contacts{display:flex;flex-direction:column;gap:12px}
+  .foot-contacts a{color:rgba(255,255,255,.7);text-decoration:none;font-size:.96rem;transition:color .2s;display:flex;align-items:center;gap:10px}
+  .foot-contacts a:hover{color:#fff}
+  .foot-bottom{display:flex;justify-content:space-between;padding-top:28px;color:rgba(255,255,255,.4);font-size:.84rem;flex-wrap:wrap;gap:10px}
+
+  /* ---------- WHATSAPP FLOAT ---------- */
+  .wa-float{
+    position:fixed;bottom:26px;right:26px;z-index:60;
+    width:58px;height:58px;border-radius:50%;background:var(--indigo);
+    display:grid;place-items:center;box-shadow:0 12px 30px -6px rgba(0,0,0,.30);
+    transition:.25s;cursor:pointer;
+  }
+  .wa-float:hover{transform:scale(1.08);background:var(--violeta)}
+  .wa-float svg{width:28px;height:28px;fill:#fff}
+
+  /* ---------- REVEAL ---------- */
+  /* GSAP controla opacity/transform; a transição CSS fica só como fallback */
+  .reveal{opacity:0;transform:translateY(24px)}
+  .reveal.in{opacity:1;transform:none}
+  .no-gsap .reveal{transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}*{scroll-behavior:auto!important}}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:920px){
+    .hero-grid,.dor-grid,.sobre-grid,.faq-grid,.form-grid{grid-template-columns:1fr;gap:44px}
+    .metric-card{order:-1}
+    .dif-grid{grid-template-columns:1fr}
+    .proc-grid{grid-template-columns:1fr 1fr}
+    .proc-step::after{display:none}
+    .nav-links{display:none}
+    .menu-btn{display:block}
+    .sobre-photo{max-width:340px}
+  }
+  @media(max-width:920px){
+    .serv-grid-3{grid-template-columns:1fr}
+    .serv-card-hl{order:-1}
+    .case{grid-template-columns:1fr}
+    .case-cover{min-height:auto;padding:22px;gap:20px}
+    .case-reverse .case-cover{order:0}
+    .seo-grid{grid-template-columns:1fr 1fr}
+    .pers-grid{grid-template-columns:1fr;gap:40px}
+    .plans-help-grid{grid-template-columns:1fr}
+  }
+  @media(max-width:560px){
+    .serv-grid{grid-template-columns:1fr}
+    .seo-grid{grid-template-columns:1fr}
+    .proc-grid{grid-template-columns:1fr}
+    .foot-top{flex-direction:column}
+    .metric-mini{gap:22px}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header id="header">
+  <div class="wrap">
+    <nav>
+      <a href="#" class="logo"><span class="ph">ph</span><span class="dev">dev</span></a>
+      <div class="nav-links">
+        <a href="#servicos">Projetos</a>
+        <a href="#performance">Planos</a>
+        <a href="#personalizacao">Como funciona</a>
+        <a href="#portfolio">Portfólio</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#faq">Dúvidas</a>
+        <a href="#contato" class="nav-cta">Falar comigo</a>
+      </div>
+      <button class="menu-btn" aria-label="Menu">☰</button>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="reveal">
+        <h1>Sites e Landing Pages orientados à <em>conversão</em></h1>
+        <p class="hero-sub">Sites que convertem: entrar em contato, solicitar um orçamento ou comprar.</p>
+        <div class="hero-actions">
+          <a href="#contato" class="btn btn-primary">Quero meu canal de venda <span class="btn-arrow">→</span></a>
+          <a href="#diferenciais" class="btn btn-ghost">Como funciona</a>
+        </div>
+        <p class="hero-micro">Preenchimento em 1 minuto</p>
+      </div>
+
+      <!-- SIGNATURE: metric card — dado REAL (Cabana). Demais projetos: medir e somar. -->
+      <div class="metric-card reveal">
+        <span class="metric-tag">Métricas do Último projeto no ar</span>
+        <div class="metric-num">28,7<small>%</small></div>
+        <p class="metric-desc">dos visitantes clicaram para reservar em 2 meses: 1 a cada 3.</p>
+        <div class="metric-divider"></div>
+        <div class="metric-mini">
+          <div><span class="mv">279</span><span class="ml">Chamadas no WhatsApp</span></div>
+          <div><span class="mv">83%</span><span class="ml">Direto, sem intermediadores, sem taxas</span></div>
+          <div><span class="mv">+1.k</span><span class="ml">Visitas</span></div>
+        </div>
+        <span class="metric-foot">Dados reais medidos na página. Outros projetos em coleta.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOR -->
+<section class="dor">
+  <div class="wrap">
+    <div class="dor-grid">
+      <div class="reveal">
+        <h2>Estar na internet é o mínimo.</h2>
+        <p>Ter um site não é diferencial. O que realmente impacta um negócio é transformar visitantes em contatos, orçamentos, vendas e clientes.</p>
+      </div>
+      <div class="dor-visual reveal">
+        <div class="dor-line off"><span class="dor-x">✕</span><span>Apenas uma vitrine online</span></div>
+        <div class="dor-line off"><span class="dor-x">✕</span><span>Design sem estratégia</span></div>
+        <div class="dor-line off"><span class="dor-x">✕</span><span>Visitantes entram e saem</span></div>
+        <div class="dor-line off"><span class="dor-x">✕</span><span>Nenhum dado para analisar</span></div>
+
+        <div class="dor-line"><span class="dor-check">✓</span><span>Uma ferramenta para gerar oportunidades</span></div>
+        <div class="dor-line"><span class="dor-check">✓</span><span>Estrutura orientada à conversão</span></div>
+        <div class="dor-line"><span class="dor-check">✓</span><span>Cada página conduz para uma ação</span></div>
+        <div class="dor-line"><span class="dor-check">✓</span><span>Métricas para acompanhar resultados</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFERTA: PROJETOS + PLANOS (abas) -->
+<section id="servicos">
+  <div class="wrap">
+
+    <div class="tabs-head reveal">
+      <div class="tabs-nav" role="tablist" aria-label="Projetos e planos">
+        <button class="tab-btn is-active" role="tab" id="tab-projetos" aria-controls="panel-projetos" aria-selected="true" tabindex="0">
+          Projetos
+          <span class="tab-btn-sub">entrega única</span>
+        </button>
+        <button class="tab-btn" role="tab" id="tab-planos" aria-controls="panel-planos" aria-selected="false" tabindex="-1">
+          Planos
+          <span class="tab-btn-sub">acompanhamento mensal</span>
+        </button>
+        <span class="tab-indicator" aria-hidden="true"></span>
+      </div>
+      <p class="tabs-hint">Projetos e planos são complementares: contrate um projeto e, se quiser, adicione acompanhamento contínuo depois.</p>
+    </div>
+
+    <div class="tab-panel is-active" role="tabpanel" id="panel-projetos" aria-labelledby="tab-projetos">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Projetos</span>
+        <h2>Três formas de colocar seu negócio para <em>vender</em> na internet.</h2>
+        <p>Cada projeto resolve um problema diferente — o princípio é o mesmo: clareza, foco no resultado e uma forma de medir o que acontece.</p>
+      </div>
+
+      <div class="serv-grid serv-grid-3">
+
+        <!-- LANDING PAGE -->
+        <div class="serv-card reveal">
+          <span class="serv-idx">01 — LANDING PAGE</span>
+          <h3>Landing Page de Conversão</h3>
+          <p class="serv-for"><strong>Ideal para</strong> infoprodutos, lançamentos, campanhas de divulgação, e ofertas específicas.</p>
+          <span class="serv-feats-label">O que você recebe</span>
+          <ul class="serv-feats">
+            <li><strong>Estrutura focada em um único objetivo</strong></li>
+            <li><strong>Copy orientada à conversão</strong></li>
+            <li><strong>Design pensado para vender</strong></li>
+            <li><strong>Carregamento rápido</strong></li>
+            <li><strong>Layout responsivo</strong></li>
+            <li><strong>Estrutura preparada para campanhas</strong></li>
+            <li><strong>Métricas e relatórios configurados</strong></li>
+          </ul>
+          <div class="serv-deadline">Entrega em 7 a 10 dias úteis</div>
+          <div class="serv-price"><span class="serv-price-label">a partir de</span><span class="serv-price-val">R$ 749</span></div>
+          <a href="#contato" class="btn btn-ghost serv-cta">Quero uma Landing Page que vende <span class="btn-arrow">→</span></a>
+        </div>
+
+        <!-- SITE INSTITUCIONAL -->
+        <div class="serv-card serv-card-hl reveal">
+          <span class="serv-badge">Mais procurado</span>
+          <span class="serv-idx">02 — SITE INSTITUCIONAL</span>
+          <h3>Site Institucional</h3>
+          <p class="serv-for"><strong>Ideal para</strong> empresas, prestadores de serviços, clínicas, escritórios, consultorias e marcas que querem crescer.</p>
+          <span class="serv-feats-label">O que você recebe</span>
+          <ul class="serv-feats">
+            <li><strong>Até 5 páginas</strong> <br> home, sobre, serviços, contato e mais uma à sua escolha.</li>
+            <li><strong>Estrutura que gera autoridade</strong></li>
+            <li><strong>WhatsApp em toda a navegação</strong></li>
+            <li><strong>Design exclusivo alinhado à sua identidade</strong></li>
+            <li><strong>Layout responsivo</strong></li>
+            <li><strong>Base preparada para crescer</strong></li>
+            <li><strong>SEO técnico e estrutural</strong></li>
+            <li><strong>Arquitetura pensada para conversão</strong></li>
+            <li><strong>Métricas configuradas</strong></li>
+          </ul>
+          <div class="serv-deadline">Entrega em 15 a 20 dias úteis</div>
+          <div class="serv-price"><span class="serv-price-label">a partir de</span><span class="serv-price-val">R$ 1.497</span></div>
+          <a href="#contato" class="btn btn-primary serv-cta">Quero um site profissional <span class="btn-arrow">→</span></a>
+        </div>
+
+        <!-- E-COMMERCE -->
+        <div class="serv-card reveal">
+          <span class="serv-idx">03 — E-COMMERCE</span>
+          <h3>Loja Virtual</h3>
+          <p class="serv-promise">Sua loja pronta para vender, configurada em uma plataforma robusta e escalável.</p>
+          <p class="serv-for"><strong>Ideal para</strong> quem quer vender produtos online com uma operação profissional, segura e pronta para crescer.</p>
+          <span class="serv-feats-label">O que você recebe</span>
+          <ul class="serv-feats">
+            <li><strong>Loja configurada em plataforma</strong> <br> estrutura sobre Shopify ou equivalente.</li>
+            <li><strong>Identidade visual aplicada à loja</strong></li>
+            <li><strong>Meios de pagamento configurados</strong></li>
+            <li><strong>Frete e entrega configurados</strong></li>
+            <li><strong>Cadastro inicial de produtos</strong></li>
+            <li><strong>Layout responsivo</strong></li>
+            <li><strong>Checkout otimizado para conversão</strong></li>
+            <li><strong>Métricas configuradas</strong></li>
+          </ul>
+          <div class="serv-deadline">Entrega sob cronograma definido no orçamento</div>
+          <p class="serv-note">O valor cobre a criação e configuração da loja. As mensalidades da plataforma e taxas de transação são custos à parte.</p>
+          <div class="serv-price"><span class="serv-price-label">a partir de</span><span class="serv-price-val">R$ 2.500</span></div>
+          <a href="#contato" class="btn btn-ghost serv-cta">Quero minha loja virtual <span class="btn-arrow">→</span></a>
+        </div>
+
+      </div>
+
+      <!-- TABELA COMPARATIVA -->
+      <div class="plans-compare reveal">
+        <details class="compare-details">
+          <summary class="compare-summary">
+            <span class="compare-summary-text">Comparar os três projetos</span>
+            <span class="compare-chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </summary>
+          <div class="compare-body">
+            <div class="plans-table-wrap">
+              <table class="plans-table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Landing Page</th>
+                    <th class="pt-hl">Site Institucional</th>
+                    <th>E-commerce</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Melhor para</td><td>Campanhas de venda</td><td class="pt-hl">Empresas</td><td>Vender produtos online</td></tr>
+                  <tr><td>Objetivo</td><td>Converter visitantes</td><td class="pt-hl">Fortalecer autoridade</td><td>Vender online</td></tr>
+                  <tr><td>Páginas</td><td>1 (longa)</td><td class="pt-hl">Até 5</td><td>Loja completa</td></tr>
+                  <tr><td>Copy escrita por mim</td><td><span class="pt-yes">Sim</span></td><td class="pt-hl">Parcial</td><td>Parcial</td></tr>
+                  <tr><td>SEO</td><td>On-page</td><td class="pt-hl">Técnico e estrutural</td><td>Configuração inicial</td></tr>
+                  <tr><td>Prazo</td><td>7 a 10 dias</td><td class="pt-hl">15 a 20 dias</td><td>Sob cronograma</td></tr>
+                  <tr class="pt-price-row"><td>A partir de</td><td>R$ 749</td><td class="pt-hl">R$ 1.497</td><td>R$ 2.500</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="compare-note">Todos os projetos incluem design personalizado, layout responsivo e métricas configuradas. No E-commerce, as mensalidades da plataforma e taxas de transação são custos à parte.</p>
+          </div>
+        </details>
+      </div>
+
+      <!-- AINDA EM DÚVIDA -->
+      <div class="plans-help reveal">
+        <h3>Qual projeto é ideal para você?</h3>
+        <div class="plans-help-grid">
+          <div class="plans-help-item">
+            <span class="ph-tag">Biosite</span>
+            <p>Se você precisa de uma presença profissional rapidamente para converter seguidores em conversas.</p>
+          </div>
+          <div class="plans-help-item">
+            <span class="ph-tag">Landing Page</span>
+            <p>Se seu objetivo é vender um produto, serviço ou campanha com máxima eficiência.</p>
+          </div>
+          <div class="plans-help-item">
+            <span class="ph-tag">Site Institucional</span>
+            <p>Se você quer posicionar sua empresa como referência e construir um ativo digital preparado para crescer.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-panel" role="tabpanel" id="panel-planos" aria-labelledby="tab-planos" hidden>
+      <div class="sec-head reveal">
+        <span class="eyebrow">Performance contínua</span>
+        <h2>Os <em>melhores resultados</em> são construídos com constância.</h2>
+        <p>
+        O comportamento dos clientes muda, o Google muda, seu negócio evolui e novas oportunidades aparecem todos os meses.
+        </p>
+        <p class="perf-optional">
+          Você pode contratar qualquer projeto sem assinatura.
+          <strong>Mas é no acompanhamento contínuo que a maioria dos resultados acontece.</strong>
+        </p>
+      </div>
+
+      <div class="serv-grid serv-grid-3">
+
+        <!-- ESSENCIAL -->
+        <div class="serv-card reveal">
+          <span class="serv-idx">01 — ESSENCIAL</span>
+          <h3>Plano Essencial</h3>
+          <p class="serv-for"><strong>Ideal para</strong> quem entende que um site fora do ar, lento ou com um botão quebrado significa clientes perdidos.</p>
+          <span class="serv-feats-label">O que está incluso</span>
+          <ul class="serv-feats">
+            <li><strong>Hospedagem gerenciada</strong></li>
+            <li><strong>Domínio e SSL renovados</strong></li>
+            <li><strong>Backup semanal</strong></li>
+            <li><strong>Monitoramento 24/7</strong></li>
+            <li><strong>Correção de falhas</strong></li>
+            <li><strong>Atualizações de segurança</strong></li>
+            <li><strong>Até 2 alterações por mês</strong> <br> informações, copy, imagens e design — você envia o material.</li>
+            <li><strong>Suporte direto por WhatsApp</strong></li>
+          </ul>
+          <div class="serv-price"><span class="serv-price-label">investimento mensal</span><span class="serv-price-val">R$ 197<small>/mês</small></span></div>
+          <a href="#contato" class="btn btn-ghost serv-cta">Quero meu site sempre no ar <span class="btn-arrow">→</span></a>
+        </div>
+
+        <!-- PERFORMANCE -->
+        <div class="serv-card serv-card-hl reveal">
+          <span class="serv-badge">Mais contratado</span>
+          <span class="serv-idx">02 — PERFORMANCE</span>
+          <h3>Plano Performance</h3>
+          <p class="serv-for"><strong>Ideal para</strong> empresas, clínicas, escritórios e prestadores de serviço que dependem de ser encontrados no Google e querem transformar visitantes em contatos de forma consistente.</p>
+          <span class="serv-feats-label">Tudo do Essencial, mais</span>
+          <ul class="serv-feats">
+            <li><strong>Criação e gestão do Google Meu Negócio</strong></li>
+            <li><strong>Conteúdo sempre atualizado</strong></li>
+            <li><strong>Relatório mensal consolidado</strong></li>
+            <li><strong>Reunião trimestral de estratégia</strong></li>
+            <li><strong>Até 4 alterações por mês</strong> <br> a copy fica por minha conta.</li>
+          </ul>
+          <div class="serv-price"><span class="serv-price-label">investimento mensal</span><span class="serv-price-val">R$ 347<small>/mês</small></span></div>
+          <a href="#contato" class="btn btn-primary serv-cta">Quero meu site melhorando todo mês <span class="btn-arrow">→</span></a>
+        </div>
+
+        <!-- CRESCIMENTO -->
+        <div class="serv-card reveal">
+          <span class="serv-idx">03 — CRESCIMENTO</span>
+          <h3>Plano Crescimento</h3>
+          <p class="serv-for"><strong>Ideal para</strong> empresas que querem ir além de ser encontradas e ativamente atrair clientes com anúncios pagos, ampliando o alcance do site de forma estruturada.</p>
+          <span class="serv-feats-label">Tudo do Performance, mais</span>
+          <ul class="serv-feats">
+            <li><strong>Gestão de tráfego pago para o site</strong></li>
+            <li><strong>Até 8 alterações por mês</strong> <br> a copy fica por minha conta.</li>
+          </ul>
+          <p class="serv-note">O valor corresponde apenas aos meus serviços. A verba de anúncios e demais custos são calculados à parte.</p>
+          <div class="serv-price"><span class="serv-price-label">investimento mensal</span><span class="serv-price-val">R$ 897<small>/mês</small></span></div>
+          <a href="#contato" class="btn btn-ghost serv-cta">Quero crescer de verdade <span class="btn-arrow">→</span></a>
+        </div>
+
+      </div>
+
+      <!-- TABELA COMPARATIVA PERFORMANCE -->
+      <div class="plans-compare reveal">
+        <details class="compare-details">
+          <summary class="compare-summary">
+            <span class="compare-summary-text">Comparar os três planos</span>
+            <span class="compare-chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </span>
+          </summary>
+          <div class="compare-body">
+            <div class="plans-table-wrap">
+              <table class="plans-table">
+                <thead>
+                  <tr><th></th><th>Essencial</th><th class="pt-hl">Performance</th><th>Crescimento</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Site no ar, seguro e com backup</td><td><span class="pt-yes">Sim</span></td><td class="pt-hl"><span class="pt-yes">Sim</span></td><td><span class="pt-yes">Sim</span></td></tr>
+                  <tr><td>Google Meu Negócio</td><td><span class="pt-no">—</span></td><td class="pt-hl"><span class="pt-yes">Sim</span></td><td><span class="pt-yes">Sim</span></td></tr>
+                  <tr><td>Relatório mensal</td><td><span class="pt-no">—</span></td><td class="pt-hl"><span class="pt-yes">Sim</span></td><td><span class="pt-yes">Sim</span></td></tr>
+                  <tr><td>Reunião de estratégia</td><td><span class="pt-no">—</span></td><td class="pt-hl">Trimestral</td><td>Trimestral</td></tr>
+                  <tr><td>Gestão de tráfego pago</td><td><span class="pt-no">—</span></td><td class="pt-hl"><span class="pt-no">—</span></td><td><span class="pt-yes">Sim</span></td></tr>
+                  <tr><td>Alterações por mês</td><td>2</td><td class="pt-hl">4</td><td>8</td></tr>
+                  <tr class="pt-price-row"><td>Investimento mensal</td><td>R$ 197</td><td class="pt-hl">R$ 347</td><td>R$ 897</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="compare-note">Todos os planos incluem hospedagem, domínio e SSL, monitoramento 24/7, correção de falhas, atualizações de segurança e suporte direto por WhatsApp. No plano Crescimento, a verba de anúncios é um custo à parte, definido junto com você.</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="plans-help reveal">
+        <h3>Qual plano faz sentido para você?</h3>
+        <div class="plans-help-grid">
+          <div class="plans-help-item">
+            <span class="ph-tag">Essencial</span>
+            <p>Se você quer apenas garantir que seu site esteja sempre no ar, seguro e atualizado.</p>
+          </div>
+          <div class="plans-help-item">
+            <span class="ph-tag">Performance</span>
+            <p>Se você depende de ser encontrado no Google e quer que seu site melhore continuamente com base em dados reais.</p>
+          </div>
+          <div class="plans-help-item">
+            <span class="ph-tag">Crescimento</span>
+            <p>Se você quer expandir sua presença digital de forma estruturada e conquistar espaço no Google de forma permanente.</p>
+          </div>
+        </div>
+        <p class="plans-help-close">Sua presença digital deve trabalhar por você 24 horas por dia. Escolha o plano ideal e comece a transformar visitantes em clientes.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ENTREGA / SEO — topo de funil -->
+<section id="encontrado">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Ser encontrado</span>
+      <h2>Um bom site precisa aparecer para as pessoas <em>certas</em>.<h2>
+      <p>Todos os projetos são desenvolvidos seguindo boas práticas de SEO aumentando suas chances de ser encontrado por quem já procura o que você oferece.</p>
+    </div>
+    <div class="seo-grid">
+      <div class="seo-card reveal">
+        <span class="seo-idx">01</span>
+        <h3>Estrutura preparada para o Google</h3>
+        <p>Desenvolvimento seguindo boas práticas de SEO para facilitar que seu site seja rastreado, compreendido e indexado corretamente.</p>
+      </div>
+      <div class="seo-card reveal">
+        <span class="seo-idx">02</span>
+        <h3>Velocidade que melhora a experiência</h3>
+        <p>Páginas rápidas reduzem o abandono, melhoram a navegação e contribuem para um melhor desempenho nas pesquisas.</p>
+      </div>
+      <div class="seo-card reveal">
+        <span class="seo-idx">03</span>
+        <h3>Conteúdo alinhado às buscas</h3>
+        <p>Estrutura preparada para utilizar palavras-chave relevantes e conectar seu negócio às pesquisas feitas pelos seus potenciais clientes.</p>
+      </div>
+      <div class="seo-card reveal">
+        <span class="seo-idx">04</span>
+        <h3>Presença local fortalecida</h3>
+        <p>
+          Configuração do Google Meu Negócio e otimizações para aumentar sua visibilidade nas buscas da sua região.
+        </p>
+      </div>
+    </div>
+    <p class="seo-note reveal">
+      A melhor estratégia de SEO não promete o primeiro lugar no Google. Ela prepara seu site para disputar as melhores posições de forma consistente.
+      <br>
+      <strong>É exatamente isso que faz parte de todos os meus projetos.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- PERSONALIZAÇÃO -->
+<section id="personalizacao" class="pers">
+  <div class="wrap">
+    <div class="pers-grid">
+      <div class="pers-copy reveal">
+        <span class="eyebrow">Feito para o seu negócio</span>
+        <h2>Seu site deve refletir o seu negócio. Não um modelo pronto.</h2>
+        <p>
+          Cada projeto começa entendendo como sua empresa funciona, quem é o seu cliente e qual resultado o site precisa gerar. A partir disso, desenvolvo uma solução sob medida, pensada para transmitir credibilidade, facilitar o contato e apoiar seus objetivos.
+        </p>
+
+        <p class="pers-signature">
+          Durante todo o projeto, você fala diretamente comigo. Sem intermediários, sem ruído na comunicação e sem perder tempo explicando a mesma necessidade várias vezes.
+        </p>
+
+      </div>
+      <div class="pers-steps reveal">
+        <div class="pers-step">
+          <span class="pers-step-n">Primeiro</span>
+          <h3>Entender</h3>
+          <p>
+            Conheço seu negócio, seu público e seus objetivos para definir exatamente o que o site precisa entregar.
+          </p>
+        </div>
+        <div class="pers-step">
+          <span class="pers-step-n">Depois</span>
+          <h3>Planejar</h3>
+          <p>
+            Planejo a estrutura, os conteúdos e a experiência de navegação para conduzir o visitante até a ação desejada.
+          </p>
+        </div>
+        <div class="pers-step">
+          <span class="pers-step-n">Então</span>
+          <h3>Executar</h3>
+          <p>
+            Transformo a estratégia em um site exclusivo, desenvolvido do zero para representar sua marca e gerar oportunidades reais de negócio.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section id="diferenciais">
+  <div class="wrap">
+    <div class="dif reveal">
+      <div class="dif-inner">
+
+        <span class="eyebrow">Meu compromisso com cada projeto</span>
+
+        <h2>
+          Mais do que um desenvolvedor, o
+          <em>condutor do seu projeto</em>
+        </h2>
+
+        <div class="dif-grid">
+
+          <div class="dif-item">
+            <div class="dif-mark">
+              <svg class="dif-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="12" cy="12" r="6"/>
+                <circle cx="12" cy="12" r="2"/>
+              </svg>
+            </div>
+            <h3>Estratégia antes da execução</h3>
+            <p>
+              Antes de definir cores ou layout, definimos o que o site precisa alcançar. Cada decisão é tomada para aproximar o visitante da ação desejada.
+            </p>
+          </div>
+
+          <div class="dif-item">
+            <div class="dif-mark"><svg class="dif-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></svg></div>
+            <h3>Comunicação direta</h3>
+            <p>
+              Sem intermediários, sem ruído na comunicação e sem retrabalho desnecessário.
+            </p>
+          </div>
+
+          <div class="dif-item">
+            <div class="dif-mark"><svg class="dif-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg></div>
+            <h3>Processo claro</h3>
+            <p>
+              Escopo, prazos e entregas definidos desde o início. Você acompanha cada etapa sabendo exatamente o que será entregue.
+            </p>
+          </div>
+
+          <div class="dif-item">
+            <div class="dif-mark"><svg class="dif-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+            <h3>Evolução contínua</h3>
+            <p>
+              O trabalho não termina quando o site vai ao ar. Ele é entregue preparado para ser acompanhado, otimizado e evoluir com base em dados reais.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    <p class="plans-help-close">
+      Porque um bom projeto não é medido pela quantidade de páginas entregues. <br> É pelos resultados que ele ajuda a gerar.
+    </p>
+  </div>
+</section>
+
+<!-- PORTFÓLIO / CASES -->
+<section id="portfolio">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Resultados reais</span>
+      <h2>Estética que gera <em>resultado.</em></h2>
+      <p>
+        Cada projeto nasce com um objetivo claro e métricas definidas desde o início. Porque um site só faz sentido quando ajuda um negócio a vender mais, gerar mais contatos ou criar novas oportunidades.
+      </p>
+    </div>
+
+    <div class="case-list">
+
+      <!-- CASE 1 -->
+      <article class="case reveal">
+        <div class="case-cover">
+          <picture class="case-img">
+            <source srcset="img/cabana.webp" type="image/webp">
+            <img src="img/cabana.jpg" alt="Site da Cabana Quatro Estações — página inicial com a cabana A-frame na Serra do RJ" loading="lazy" decoding="async" width="1280" height="720">
+          </picture>
+
+          <div class="case-metrics">
+            <div class="case-metric case-metric-hero">
+              <span class="cm-val">1.1k<small>+</small></span>
+              <span class="cm-label">visitantes</span>
+            </div>
+            <div class="case-metric">
+              <span class="cm-val">317<small>+</small></span>
+              <span class="cm-label">conversas iniciadas</span>
+            </div>
+            <div class="case-metric">
+              <span class="cm-val">28<small>%</small></span>
+              <span class="cm-label">dos visitantes clicaram para entrar em contato</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <span class="case-type">Site institucional</span>
+          <h3 class="case-title">Cabana Quatro Estações</h3>
+          <p class="case-desc">Hospedagem na Serra do RJ. O objetivo era reduzir a dependência de plataformas como Airbnb e Booking, incentivando reservas diretas pelo WhatsApp.
+          <br>
+          O resultado foi uma taxa de intenção de reserva de 28,7%, com a maioria dos visitantes iniciando contato diretamente com a proprietária.
+          </p>
+          <blockquote class="case-quote">“As reservas passaram a chegar direto no WhatsApp. O site transmite exatamente a experiência da cabana.”<cite>— depoimento a coletar com a proprietária</cite></blockquote>
+          <a href="URL_CABANA_AQUI" class="case-visit" target="_blank" rel="noopener noreferrer">
+            <span>Ver o site no ar</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- CASE 2 -->
+      <article class="case case-reverse reveal">
+        <div class="case-cover">
+          <span class="case-cover-ph">[ capa do projeto — print da tela ]</span>
+
+          <div class="case-metrics">
+            <div class="case-metric case-metric-hero">
+              <span class="cm-val">3.1k<small>+</small></span>
+              <span class="cm-label">visitas</span>
+            </div>
+            <div class="case-metric">
+              <span class="cm-val">468<small>+</small></span>
+              <span class="cm-label">conversas iniciadas</span>
+            </div>
+            <div class="case-metric">
+              <span class="cm-val">15%</span>
+              <span class="cm-label">dos visitantes clicaram para entrar em contato</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <span class="case-type">Site institucional</span>
+          <h3 class="case-title">OnzeOnze · Studio Criativo</h3>
+          <p class="case-desc">Studio de estratégia, conteúdo e fotografia para marcas autênticas. O desafio era transformar um portfólio criativo em uma ferramenta capaz de gerar contatos qualificados sem perder a identidade da marca. <br>
+          O projeto foi estruturado para construir confiança rapidamente e reduzir o caminho até o WhatsApp.
+          </p>
+          <blockquote class="case-quote">“Ficou a nossa cara — próximo e profissional ao mesmo tempo. Começaram a chegar contatos mais qualificados.”<cite>— sócios do studio</cite></blockquote>
+          <a href="URL_ONZEONZE_AQUI" class="case-visit" target="_blank" rel="noopener noreferrer">
+            <span>Ver o site no ar</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- CASE 3 -->
+      <article class="case reveal">
+        <div class="case-cover">
+          <picture class="case-img">
+            <source srcset="img/template.webp" type="image/webp">
+            <img src="img/template.jpg" alt="Landing page do Template Social Media Pro — sistema de gestão de redes sociais no Notion" loading="lazy" decoding="async" width="1280" height="720">
+          </picture>
+
+          <div class="case-metrics">
+            <div class="case-metric case-metric-hero">
+              <span class="cm-val">2.4k<small>+</small></span>
+              <span class="cm-label">visitas</span>
+            </div>
+            <div class="case-metric">
+              <span class="cm-val">312<small>+</small></span>
+              <span class="cm-label">cliques no checkout</span>
+            </div>
+            <div class="case-metric">
+              <span class="cm-val">13%</span>
+              <span class="cm-label">dos visitantes seguiram para a compra</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <span class="case-type">Landing Page</span>
+          <h3 class="case-title">Template Social Media Pro</h3>
+          <p class="case-desc">O cliente precisava transformar visitantes interessados em compradores do template, eliminando distrações e conduzindo diretamente ao checkout. <br>
+          Desenvolvi uma Landing Page com estrutura orientada à conversão, copy estratégica e um único objetivo: levar o visitante até a compra.
+          </p>
+          <blockquote class="case-quote">“Organizou tudo o que eu tentava explicar. A página vende sozinha.”<cite>— cliente, criador do template</cite></blockquote>
+          <a href="URL_TEMPLATE_AQUI" class="case-visit" target="_blank" rel="noopener noreferrer">
+            <span>Ver a página no ar</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </article>
+
+
+    </div>
+
+    <p class="case-note reveal">*Todos os números apresentados são medidos diretamente nas páginas por ferramentas de análise e podem variar conforme o período de coleta e o volume de tráfego.</p>
+
+    <div class="case-cta reveal">
+      <a href="#contato" class="btn btn-primary">Quero um resultado assim <span class="btn-arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="wrap">
+    <div class="sobre-grid">
+      <div class="sobre-photo reveal">
+        <span class="mono">ph</span>
+        <span class="ph-note">substituir pela foto do Pedro</span>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">Quem está por trás dos projetos</span>
+        <div class="sobre-name">Pedro Hammes</div>
+        <div class="sobre-role">Desenvolvedor Web • Fundador da phdev</div>
+        <p>
+          Acredito que bons projetos começam com boas conversas. Antes de escrever qualquer linha de código, procuro entender seu negócio, seus objetivos e como o site pode contribuir para eles.
+        </p>
+
+        <p>
+          Você acompanha todo o projeto falando diretamente comigo, do planejamento à entrega. Isso garante uma comunicação clara, decisões mais rápidas e um desenvolvimento alinhado aos objetivos do seu negócio.
+        </p>
+
+        <p>
+          Meu trabalho termina quando o site é publicado. Meu objetivo começa quando ele passa a gerar resultados para o seu negócio.
+        </p>
+        <div class="hero-actions" style="margin-top:28px">
+          <a href="#contato" class="btn btn-primary">Vamos conversar sobre o seu projeto<span class="btn-arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section class="proc">
+  <div class="wrap">
+
+    <div class="sec-head reveal">
+      <span class="eyebrow">Como funciona</span>
+
+      <h2>
+        Projetos organizados geram
+        <em>resultados melhores.</em>
+      </h2>
+
+      <p>
+        Antes de desenvolver qualquer página, definimos objetivos, estratégia e entregáveis. Assim, você acompanha todo o processo com clareza e sabe exatamente o que esperar em cada etapa.
+      </p>
+    </div>
+
+    <div class="proc-grid">
+
+      <div class="proc-step reveal">
+        <h3>1. Entender</h3>
+        <p>
+          Conheço seu negócio, seu público e os objetivos do projeto para definir a melhor estratégia.
+        </p>
+      </div>
+
+      <div class="proc-step reveal">
+        <h3>2. Planejar</h3>
+        <p>
+          Organizamos escopo, cronograma e estrutura da página antes do desenvolvimento começar.
+        </p>
+      </div>
+
+      <div class="proc-step reveal">
+        <h3>3. Desenvolver</h3>
+        <p>
+          Transformo a estratégia em um site rápido, responsivo e orientado à conversão.
+        </p>
+      </div>
+
+      <div class="proc-step reveal">
+        <h3>4. Evoluir</h3>
+        <p>
+          Seu site entra no ar com métricas configuradas e preparado para evoluir com base em dados reais.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="faq-grid">
+      <div class="reveal">
+        <span class="eyebrow">Perguntas frequentes</span>
+        <h2 style="font-family:var(--display);font-size:clamp(1.9rem,3.6vw,2.6rem);font-weight:700;letter-spacing:-.02em">Tudo o que você precisa saber antes de iniciar seu projeto</h2>
+        <p style="color:var(--ardosia);margin-top:18px;font-size:1.04rem">Transparência faz parte do processo. Se sua dúvida não estiver aqui, você fala diretamente comigo.</p>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-q">O site é meu?</button>
+          <div class="faq-a"><p>Sim. O site pertence à sua empresa. Você mantém o domínio, o conteúdo e os arquivos do projeto, sem ficar preso a um fornecedor.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Quanto custa um projeto?</button>
+          <div class="faq-a"><p>Cada projeto é desenvolvido sob medida. O investimento depende do escopo, da quantidade de páginas e das funcionalidades necessárias. Antes de qualquer orçamento, conversamos sobre seus objetivos para que você receba uma proposta clara, sem custos escondidos ou surpresas durante o desenvolvimento.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Em quanto tempo fica pronto?</button>
+          <div class="faq-a"><p>Varia com o tamanho do projeto. Uma landing page costuma sair mais rápido que um site institucional completo. Na proposta você já recebe o prazo combinado, sem surpresa depois.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Eu preciso já ter o conteúdo e as imagens?</button>
+          <div class="faq-a"><p>Não. Podemos iniciar o projeto mesmo que você ainda esteja organizando textos ou imagens. Durante o planejamento identificamos o que já existe e o que será necessário produzir.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Você garante que vou vender mais?</button>
+          <div class="faq-a"><p>Nenhum profissional sério pode garantir vendas, porque elas dependem de fatores como oferta, preço, atendimento e tráfego. O que eu entrego é um site desenvolvido seguindo boas práticas de conversão, desempenho e SEO, além de métricas para acompanhar os resultados e tomar decisões com base em dados.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Trabalha com que tipo de negócio?</button>
+          <div class="faq-a"><p>Trabalho principalmente com empresas, prestadores de serviço, profissionais autônomos e infoprodutores que desejam fortalecer sua presença digital e transformar visitantes em oportunidades de negócio.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Consigo editar o site depois de pronto?</button>
+          <div class="faq-a"><p>Sim. Após a entrega trabalho com planos de acompanhamento contínuo, para que você nunca fique na mão. Se preferir, também ofereço serviços de manutenção pontuais, sem mensalidade.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">E o suporte depois que entra no ar?</button>
+          <div class="faq-a"><p>Sim. Todos os projetos incluem suporte inicial de 30 dias após a publicação para garantir que tudo esteja funcionando corretamente. Caso queira um acompanhamento contínuo com melhorias e atualizações, você pode contratar um dos Planos de Performance.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Você configura domínio e hospedagem?</button>
+          <div class="faq-a"><p>Sim. Cuido da configuração do domínio, hospedagem, certificado SSL e publicação do site. Se você já possui esses serviços contratados, utilizo a estrutura existente.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Preciso contratar um plano mensal?</button>
+          <div class="faq-a"><p>Não. O projeto pode ser contratado de forma avulsa. Os planos mensais são opcionais e existem para quem deseja manter o site atualizado, seguro e evoluindo continuamente.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Posso começar sem plano e assinar depois?</button>
+          <div class="faq-a"><p>Sim. Você pode contratar apenas o projeto e assinar um plano quando fizer sentido para o seu momento.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Existe fidelidade? Posso mudar de plano?</button>
+          <div class="faq-a"><p>Não existe fidelidade. Os planos são mensais e podem ser alterados ou cancelados a qualquer momento. A ideia é que você permaneça pelos resultados, não por obrigação contratual.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">O que acontece se eu cancelar?</button>
+          <div class="faq-a"><p>O site sempre pertence a você. Em caso de cancelamento, todo o conteúdo continua sendo seu e, se necessário, auxilio na migração para outro serviço.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Os valores dos projetos são fixos?</button>
+          <div class="faq-a"><p>Os valores apresentados são o investimento inicial para cada tipo de projeto. Funcionalidades específicas, integrações ou páginas adicionais são orçadas separadamente antes do início do desenvolvimento.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Como funciona o pagamento?</button>
+          <div class="faq-a"><p>O pagamento é combinado antes do início do projeto. Normalmente trabalhamos com uma entrada para iniciar o desenvolvimento e o restante na entrega.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Vou acompanhar o projeto?</button>
+          <div class="faq-a"><p>Sim. Você acompanha todas as etapas e fala diretamente comigo durante o desenvolvimento. Assim, decisões são tomadas com rapidez e o projeto permanece alinhado aos seus objetivos.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">O site funciona no celular?</button>
+          <div class="faq-a"><p>Sim. Todos os projetos são desenvolvidos com design responsivo, garantindo uma boa experiência em celulares, tablets e computadores.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">O site será encontrado no Google?</button>
+          <div class="faq-a"><p>Todos os projetos já incluem uma estrutura técnica preparada para SEO, aumentando as chances de indexação e visibilidade nas pesquisas. O posicionamento depende de diversos fatores e é construído ao longo do tempo.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Ainda ficou alguma dúvida?</button>
+          <div class="faq-a"><p>Cada projeto é diferente. Se sua dúvida não apareceu aqui, basta entrar em contato. Você conversa diretamente comigo e recebe uma orientação sem compromisso, antes de qualquer decisão.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="form-sec" id="contato">
+  <div class="wrap">
+    <div class="form-grid">
+      <div class="form-copy reveal">
+        <span class="eyebrow">Contato</span>
+        <h2>Vamos construir seu <em>canal de venda.</em></h2>
+        <p>Me conta rapidamente o que você precisa. Respondo pessoalmente com os próximos passos.</p>
+        <div class="form-alt">
+          <span>Prefere WhatsApp?</span>
+          <a href="https://wa.me/55" target="_blank" rel="noopener">Chamar agora →</a>
+        </div>
+      </div>
+      <div class="form-card reveal">
+        <div class="field">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" placeholder="Como posso te chamar?">
+        </div>
+        <div class="field">
+          <label for="wpp">WhatsApp</label>
+          <input type="tel" id="wpp" placeholder="(00) 00000-0000">
+        </div>
+        <div class="field">
+          <label for="tipo">O que você precisa?</label>
+          <select id="tipo">
+            <option>Landing Page</option>
+            <option>Site institucional</option>
+            <option>Não sei ainda</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="neg">Sobre seu negócio <span class="opt">(opcional)</span></label>
+          <input type="text" id="neg" placeholder="Em uma linha, o que você faz">
+        </div>
+        <a href="#" class="btn btn-primary">Enviar e receber retorno <span class="btn-arrow">→</span></a>
+        <p class="form-micro">Sem compromisso · Respondo em até 24h</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a href="#" class="logo"><span class="ph" style="color:var(--violeta-claro)">ph</span><span style="color:#fff">dev</span></a>
+        <p>Sites & Landing Pages orientados a conversão.</p>
+        <div class="foot-tag">feito para vender</div>
+      </div>
+      <div class="foot-contacts">
+        <a href="mailto:contato@pedrohammes.dev">✉ contato@pedrohammes.dev</a>
+        <a href="https://wa.me/55" target="_blank" rel="noopener">◆ WhatsApp</a>
+        <a href="#contato">→ Falar sobre um projeto</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 phdev · Pedro Hammes</span>
+      <span>Grafite, índigo & muita clareza.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/55" target="_blank" rel="noopener" class="wa-float" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.6 6.3A7.9 7.9 0 0 0 12 4a7.9 7.9 0 0 0-6.8 11.9L4 20l4.2-1.1A7.9 7.9 0 0 0 12 20a7.9 7.9 0 0 0 5.6-13.7zM12 18.5c-1.2 0-2.4-.3-3.4-.9l-.2-.1-2.5.7.7-2.4-.2-.3A6.5 6.5 0 1 1 12 18.5zm3.6-4.9c-.2-.1-1.2-.6-1.3-.6-.2-.1-.3-.1-.4.1l-.6.7c-.1.1-.2.1-.4 0a5.3 5.3 0 0 1-2.6-2.3c-.2-.3.2-.3.5-1 .1-.1 0-.3 0-.4l-.6-1.4c-.2-.4-.3-.3-.5-.3h-.3a.8.8 0 0 0-.6.3 2.4 2.4 0 0 0-.7 1.8A4.2 4.2 0 0 0 9 12.3a9.5 9.5 0 0 0 3.6 3.2c1.3.6 1.8.6 2.5.5.4-.1 1.2-.5 1.4-1 .2-.5.2-.9.1-1-.1-.1-.2-.1-.4-.2z"/></svg>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+
+<script>
+  // sticky nav border
+  const header=document.getElementById('header');
+  window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>10));
+
+  // ---------- ABAS (Projetos / Planos) ----------
+  (function initTabs(){
+    const nav = document.querySelector('.tabs-nav');
+    if (!nav) return;
+    const btns = [...nav.querySelectorAll('.tab-btn')];
+    const indicator = nav.querySelector('.tab-indicator');
+
+    const moveIndicator = (btn) => {
+      if (!indicator || !btn) return;
+      indicator.style.width = btn.offsetWidth + 'px';
+      indicator.style.transform = 'translateX(' + (btn.offsetLeft - 5) + 'px)';
+    };
+
+    const activate = (btn, focus) => {
+      btns.forEach(b => {
+        const panel = document.getElementById(b.getAttribute('aria-controls'));
+        const on = b === btn;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+        b.tabIndex = on ? 0 : -1;
+        if (panel) {
+          panel.hidden = !on;
+          panel.classList.toggle('is-active', on);
+        }
+      });
+      moveIndicator(btn);
+      if (focus) btn.focus();
+      // recalcula posições das animações de scroll no painel recém-exibido
+      if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    };
+
+    btns.forEach(btn => btn.addEventListener('click', () => activate(btn, false)));
+
+    // navegação por teclado (padrão ARIA para tabs)
+    nav.addEventListener('keydown', (e) => {
+      const i = btns.indexOf(document.activeElement);
+      if (i < 0) return;
+      let next = null;
+      if (e.key === 'ArrowRight') next = btns[(i + 1) % btns.length];
+      else if (e.key === 'ArrowLeft') next = btns[(i - 1 + btns.length) % btns.length];
+      else if (e.key === 'Home') next = btns[0];
+      else if (e.key === 'End') next = btns[btns.length - 1];
+      if (next) { e.preventDefault(); activate(next, true); }
+    });
+
+    // posicionar indicador no load e ao redimensionar
+    const initial = btns.find(b => b.classList.contains('is-active')) || btns[0];
+    requestAnimationFrame(() => moveIndicator(initial));
+    window.addEventListener('resize', () => {
+      moveIndicator(btns.find(b => b.classList.contains('is-active')) || btns[0]);
+    });
+
+    // links internos (#performance) abrem a aba correspondente
+    document.querySelectorAll('a[href="#performance"], a[href="#planos"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        activate(btns[1], false);
+        document.getElementById('servicos').scrollIntoView({behavior:'smooth'});
+      });
+    });
+  })();
+
+  // ---------- ANIMAÇÕES (GSAP) ----------
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasGSAP = typeof gsap !== 'undefined';
+
+  if (!hasGSAP || reduceMotion) {
+    // Fallback: sem GSAP ou com movimento reduzido, revela tudo imediatamente
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  } else {
+    gsap.registerPlugin(ScrollTrigger);
+    if (typeof DrawSVGPlugin !== 'undefined') gsap.registerPlugin(DrawSVGPlugin);
+
+    // 1) REVEAL com stagger por grupo -------------------------------------
+    // Agrupa .reveal irmãos para entrarem em sequência, não todos juntos.
+    const groups = new Map();
+    document.querySelectorAll('.reveal').forEach(el => {
+      const parent = el.parentElement;
+      if (!groups.has(parent)) groups.set(parent, []);
+      groups.get(parent).push(el);
+    });
+
+    groups.forEach(els => {
+      gsap.to(els, {
+        opacity: 1,
+        y: 0,
+        duration: .7,
+        ease: 'power2.out',
+        stagger: els.length > 1 ? .09 : 0,
+        scrollTrigger: {
+          trigger: els[0],
+          start: 'top 88%',
+          once: true
+        },
+        onStart: () => els.forEach(e => e.classList.add('in'))
+      });
+    });
+
+    // 2) CONTAGEM DOS NÚMEROS ---------------------------------------------
+    // Preserva prefixo/sufixo (%, +, k, vírgula decimal).
+    const countUp = (el) => {
+      const raw = el.textContent.trim();
+      const match = raw.match(/^([^0-9]*)([0-9]+(?:[.,][0-9]+)?)(.*)$/);
+      if (!match) return;
+      const [, prefix, numStr, suffix] = match;
+
+      const isDecimal = /,/.test(numStr);
+      // "1.1k" -> ponto é decimal (sufixo k/M); "1.070" -> ponto é separador de milhar
+      const dotIsDecimal = /^[kmb]/i.test(suffix.trim()) || /\.\d{1,2}$/.test(numStr);
+      const target = isDecimal
+        ? parseFloat(numStr.replace(/\./g, '').replace(',', '.'))
+        : (dotIsDecimal ? parseFloat(numStr) : parseFloat(numStr.replace(/\./g, '')));
+      if (isNaN(target)) return;
+
+      const hasThousandDot = /\./.test(numStr) && !isDecimal && dotIsDecimal;
+      const obj = { v: 0 };
+
+      gsap.to(obj, {
+        v: target,
+        duration: 1.6,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 92%', once: true },
+        onStart: () => { el.textContent = prefix + (isDecimal ? '0,0' : '0') + suffix; },
+        onUpdate: () => {
+          let out;
+          if (isDecimal) {
+            out = obj.v.toFixed(1).replace('.', ',');
+          } else if (hasThousandDot) {
+            out = obj.v.toFixed(1);
+          } else {
+            out = Math.round(obj.v).toString();
+          }
+          el.textContent = prefix + out + suffix;
+        },
+        onComplete: () => {
+          el.textContent = raw;
+          // acento verde: pisca e desvanece (apenas nos números-herói)
+          // todos os números piscam em verde ao concluir a contagem
+          const baseColor = getComputedStyle(el).color;
+          gsap.fromTo(el,
+            { color: '#00C566' },
+            { color: baseColor, duration: 1.4, ease: 'power2.out', delay: .15,
+              onComplete: () => {
+                el.style.color = '';
+                // números de tráfego mantêm pulso contínuo
+                if (el.dataset.live === '1') el.classList.add('num-live');
+              } }
+          );
+        }
+      });
+    };
+
+    // Marca os números-herói: card do hero + métrica principal de cada case
+    document.querySelectorAll('.metric-num, .case-metric-hero .cm-val').forEach(el => {
+      el.dataset.hero = '1';
+    });
+
+    // Marca os números de tráfego (visitantes/visitas) para pulso contínuo
+    document.querySelectorAll('.case-metric').forEach(m => {
+      const label = m.querySelector('.cm-label');
+      const val = m.querySelector('.cm-val');
+      if (label && val && /^(visitantes?|visitas?|acessos?)$/i.test(label.textContent.trim())) {
+        val.dataset.live = '1';
+      }
+    });
+
+    document.querySelectorAll('.cm-val, .mv, .metric-num').forEach(el => {
+      // ignora elementos sem dígito
+      if (/[0-9]/.test(el.textContent)) countUp(el);
+    });
+
+    // 2b) REVEAL DAS CAPAS (clip-path, como cortina subindo) ---------------
+    document.querySelectorAll('.case-img').forEach(frame => {
+      const img = frame.querySelector('img');
+      gsap.fromTo(frame,
+        { clipPath: 'inset(100% 0% 0% 0%)' },
+        {
+          clipPath: 'inset(0% 0% 0% 0%)',
+          duration: .95,
+          ease: 'power3.inOut',
+          scrollTrigger: { trigger: frame, start: 'top 85%', once: true },
+          onComplete: () => { gsap.set(frame, { clearProps: 'clipPath' }); }
+        }
+      );
+      // a imagem parte levemente ampliada e assenta — sensação de "tela ligando"
+      if (img) {
+        gsap.fromTo(img,
+          { scale: 1.12 },
+          {
+            scale: 1,
+            duration: 1.3,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: frame, start: 'top 85%', once: true },
+            // limpa o transform inline para o hover (CSS) voltar a funcionar
+            onComplete: () => { gsap.set(img, { clearProps: 'transform' }); }
+          }
+        );
+      }
+    });
+
+    // 3) DRAWSVG nos ícones dos diferenciais -------------------------------
+    if (typeof DrawSVGPlugin !== 'undefined') {
+      const icons = document.querySelectorAll('.dif-icon');
+      if (icons.length) {
+        icons.forEach((svg, i) => {
+          const shapes = svg.querySelectorAll('path, circle, polyline, line, rect');
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: svg.closest('.dif-grid') || svg,
+              start: 'top 80%',
+              once: true
+            },
+            delay: i * .12
+          });
+          // desenha em verde...
+          tl.fromTo(shapes,
+            { drawSVG: '0%', stroke: '#00C566' },
+            { drawSVG: '100%', duration: .9, ease: 'power1.inOut', stagger: .06 }
+          )
+          // ...e desvanece para branco
+          .to(shapes,
+            { stroke: '#FFFFFF', duration: 1.1, ease: 'power2.out' },
+            '-=0.15'
+          );
+        });
+      }
+    }
+  }
+
+  // faq accordion
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    item.querySelector('.faq-q').addEventListener('click',()=>{
+      const open=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!open)item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>
