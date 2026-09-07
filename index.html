@@ -28,6 +28,8 @@
     --gap:clamp(72px,10vw,140px);
   }
 
+ 
+
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
@@ -407,19 +409,38 @@
   .sobre-grid p{color:var(--ardosia);font-size:1.08rem;margin-bottom:18px}
   .sobre-grid p strong{color:var(--grafite);font-weight:600}
 
-  /* ---------- PROCESSO ---------- */
-  .proc{background:var(--branco);border-block:1px solid var(--nevoa)}
+  /* ---------- PROCESSO (fundo escuro) ---------- */
+  .proc{background:var(--grafite);color:#fff;border-block:1px solid rgba(255,255,255,.1)}
+  .proc .eyebrow{color:var(--violeta-claro)}
+  .proc .eyebrow::before{background:var(--violeta-claro)}
+  .proc .sec-head h2{color:#fff}
+  .proc .sec-head h2 em{font-style:normal;font-family:var(--script);color:var(--violeta-claro);font-size:1.15em}
+  .proc .sec-head p{color:rgba(255,255,255,.68)}
   .proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:12px;counter-reset:step}
   .proc-step{position:relative;padding-top:32px}
   .proc-step::before{
     counter-increment:step;content:"0" counter(step);
-    font-family:var(--display);font-weight:700;font-size:.9rem;color:var(--indigo);
+    font-family:var(--display);font-weight:700;font-size:.9rem;color:var(--verde);
     position:absolute;top:0;left:0;
   }
-  .proc-step::after{content:"";position:absolute;top:6px;left:34px;right:-12px;height:1px;background:var(--nevoa)}
+  .proc-step::after{content:"";position:absolute;top:6px;left:34px;right:-12px;height:1px;background:rgba(255,255,255,.14)}
   .proc-step:last-child::after{display:none}
-  .proc-step h3{font-size:1.14rem;font-weight:600;margin-bottom:10px}
-  .proc-step p{color:var(--ardosia);font-size:.96rem}
+  .proc-step h3{font-size:1.14rem;font-weight:600;margin-bottom:10px;color:#fff}
+  .proc-step p{color:rgba(255,255,255,.66);font-size:.96rem}
+
+  /* Processo — tira de reforço (diferenciais condensados) */
+  .proc-reinforce{
+    list-style:none;padding:26px 0 0;margin:44px 0 0;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+    border-top:1px solid rgba(255,255,255,.14);
+  }
+  .proc-reinforce li{
+    display:flex;align-items:center;gap:12px;
+    font-family:var(--display);font-size:.92rem;font-weight:600;color:rgba(255,255,255,.9);line-height:1.3;
+  }
+  .proc-reinforce svg{width:22px;height:22px;flex-shrink:0;color:var(--verde)}
+  .proc-reinforce svg path,.proc-reinforce svg circle,.proc-reinforce svg polyline,.proc-reinforce svg line,.proc-reinforce svg rect{stroke:var(--verde)}
+  .proc .plans-help-close{color:rgba(255,255,255,.6);margin-top:40px}
 
   /* ---------- FAQ ---------- */
   .faq-grid{display:grid;grid-template-columns:.62fr 1fr;gap:56px;align-items:start}
@@ -497,6 +518,7 @@
     .dif-grid{grid-template-columns:1fr}
     .proc-grid{grid-template-columns:1fr 1fr}
     .proc-step::after{display:none}
+    .proc-reinforce{grid-template-columns:1fr 1fr;gap:16px}
     .nav-links{display:none}
     .menu-btn{display:block}
     .sobre-photo{max-width:340px}
@@ -515,6 +537,7 @@
     .serv-grid{grid-template-columns:1fr}
     .seo-grid{grid-template-columns:1fr}
     .proc-grid{grid-template-columns:1fr}
+    .proc-reinforce{grid-template-columns:1fr}
     .foot-top{flex-direction:column}
     .metric-mini{gap:22px}
   }
@@ -548,7 +571,7 @@
     <div class="hero-grid">
       <div class="reveal">
         <h1>Sites e Landing Pages orientados à <em>conversão</em></h1>
-        <p class="hero-sub">Sites que convertem: entrar em contato, solicitar um orçamento ou comprar.</p>
+        <p class="hero-sub">Entrar em contato, solicitar um orçamento ou comprar: sites que convertem</p>
         <div class="hero-actions">
           <a href="#contato" class="btn btn-primary">Quero meu canal de venda <span class="btn-arrow">→</span></a>
           <a href="#diferenciais" class="btn btn-ghost">Como funciona</a>
@@ -559,13 +582,13 @@
       <!-- SIGNATURE: metric card — dado REAL (Cabana). Demais projetos: medir e somar. -->
       <div class="metric-card reveal">
         <span class="metric-tag">Métricas do Último projeto no ar</span>
-        <div class="metric-num">28,7<small>%</small></div>
-        <p class="metric-desc">dos visitantes clicaram para reservar em 2 meses: 1 a cada 3.</p>
+        <div class="metric-num">15<small>%</small></div>
+        <p class="metric-desc">dos visitantes clicaram para reservar</p>
         <div class="metric-divider"></div>
         <div class="metric-mini">
-          <div><span class="mv">279</span><span class="ml">Chamadas no WhatsApp</span></div>
-          <div><span class="mv">83%</span><span class="ml">Direto, sem intermediadores, sem taxas</span></div>
-          <div><span class="mv">+1.k</span><span class="ml">Visitas</span></div>
+          <div><span class="mv">+1.000</span><span class="ml">Chamadas no WhatsApp</span></div>
+          <div><span class="mv">15%</span><span class="ml">Direto, sem intermediadores, sem taxas</span></div>
+          <div><span class="mv">+6.9k</span><span class="ml">Visitas</span></div>
         </div>
         <span class="metric-foot">Dados reais medidos na página. Outros projetos em coleta.</span>
       </div>
@@ -733,16 +756,16 @@
         <h3>Qual projeto é ideal para você?</h3>
         <div class="plans-help-grid">
           <div class="plans-help-item">
-            <span class="ph-tag">Biosite</span>
-            <p>Se você precisa de uma presença profissional rapidamente para converter seguidores em conversas.</p>
-          </div>
-          <div class="plans-help-item">
             <span class="ph-tag">Landing Page</span>
             <p>Se seu objetivo é vender um produto, serviço ou campanha com máxima eficiência.</p>
           </div>
           <div class="plans-help-item">
             <span class="ph-tag">Site Institucional</span>
             <p>Se você quer posicionar sua empresa como referência e construir um ativo digital preparado para crescer.</p>
+          </div>
+          <div class="plans-help-item">
+            <span class="ph-tag">E-commerce</span>
+            <p>Se você quer vender produtos online com uma loja profissional e pronta para escalar.</p>
           </div>
         </div>
       </div>
@@ -862,7 +885,7 @@
           </div>
           <div class="plans-help-item">
             <span class="ph-tag">Crescimento</span>
-            <p>Se você quer expandir sua presença digital de forma estruturada e conquistar espaço no Google de forma permanente.</p>
+            <p>Se você quer ir além do orgânico e atrair clientes ativamente com anúncios pagos, com alguém cuidando da gestão para você.</p>
           </div>
         </div>
         <p class="plans-help-close">Sua presença digital deve trabalhar por você 24 horas por dia. Escolha o plano ideal e comece a transformar visitantes em clientes.</p>
@@ -872,146 +895,75 @@
   </div>
 </section>
 
-<!-- ENTREGA / SEO — topo de funil -->
-<section id="encontrado">
+<!-- PROCESSO + DIFERENCIAIS -->
+<section class="proc">
   <div class="wrap">
+
     <div class="sec-head reveal">
-      <span class="eyebrow">Ser encontrado</span>
-      <h2>Um bom site precisa aparecer para as pessoas <em>certas</em>.<h2>
-      <p>Todos os projetos são desenvolvidos seguindo boas práticas de SEO aumentando suas chances de ser encontrado por quem já procura o que você oferece.</p>
+      <span class="eyebrow">O que esperar</span>
+
+      <h2>
+        Você sempre sabe
+        <em>em que etapa estamos.</em>
+      </h2>
+
+      <p>
+        Nada de projeto que some por semanas e volta pronto sem você entender o caminho. Cada fase tem entrega clara e um ponto de contato — você acompanha do briefing ao site no ar.
+      </p>
     </div>
-    <div class="seo-grid">
-      <div class="seo-card reveal">
-        <span class="seo-idx">01</span>
-        <h3>Estrutura preparada para o Google</h3>
-        <p>Desenvolvimento seguindo boas práticas de SEO para facilitar que seu site seja rastreado, compreendido e indexado corretamente.</p>
-      </div>
-      <div class="seo-card reveal">
-        <span class="seo-idx">02</span>
-        <h3>Velocidade que melhora a experiência</h3>
-        <p>Páginas rápidas reduzem o abandono, melhoram a navegação e contribuem para um melhor desempenho nas pesquisas.</p>
-      </div>
-      <div class="seo-card reveal">
-        <span class="seo-idx">03</span>
-        <h3>Conteúdo alinhado às buscas</h3>
-        <p>Estrutura preparada para utilizar palavras-chave relevantes e conectar seu negócio às pesquisas feitas pelos seus potenciais clientes.</p>
-      </div>
-      <div class="seo-card reveal">
-        <span class="seo-idx">04</span>
-        <h3>Presença local fortalecida</h3>
+
+    <div class="proc-grid">
+
+      <div class="proc-step reveal">
+        <h3>1. Briefing</h3>
         <p>
-          Configuração do Google Meu Negócio e otimizações para aumentar sua visibilidade nas buscas da sua região.
+          Uma conversa para entender seu negócio, seu público e o que o site precisa gerar. Saímos com objetivo e escopo definidos.
         </p>
       </div>
-    </div>
-    <p class="seo-note reveal">
-      A melhor estratégia de SEO não promete o primeiro lugar no Google. Ela prepara seu site para disputar as melhores posições de forma consistente.
-      <br>
-      <strong>É exatamente isso que faz parte de todos os meus projetos.</strong>
-    </p>
-  </div>
-</section>
 
-<!-- PERSONALIZAÇÃO -->
-<section id="personalizacao" class="pers">
-  <div class="wrap">
-    <div class="pers-grid">
-      <div class="pers-copy reveal">
-        <span class="eyebrow">Feito para o seu negócio</span>
-        <h2>Seu site deve refletir o seu negócio. Não um modelo pronto.</h2>
+      <div class="proc-step reveal">
+        <h3>2. Planejamento</h3>
         <p>
-          Cada projeto começa entendendo como sua empresa funciona, quem é o seu cliente e qual resultado o site precisa gerar. A partir disso, desenvolvo uma solução sob medida, pensada para transmitir credibilidade, facilitar o contato e apoiar seus objetivos.
+          Você recebe escopo, cronograma e estrutura das páginas por escrito — e aprova antes de qualquer linha de código.
         </p>
+      </div>
 
-        <p class="pers-signature">
-          Durante todo o projeto, você fala diretamente comigo. Sem intermediários, sem ruído na comunicação e sem perder tempo explicando a mesma necessidade várias vezes.
+      <div class="proc-step reveal">
+        <h3>3. Desenvolvimento</h3>
+        <p>
+          Construo o site e te mostro a evolução no caminho, para ajustar antes da entrega — não depois.
         </p>
+      </div>
 
+      <div class="proc-step reveal">
+        <h3>4. Entrega &amp; acompanhamento</h3>
+        <p>
+          Site no ar com métricas configuradas. A partir daí, você segue sozinho ou com um plano de manutenção.
+        </p>
       </div>
-      <div class="pers-steps reveal">
-        <div class="pers-step">
-          <span class="pers-step-n">Primeiro</span>
-          <h3>Entender</h3>
-          <p>
-            Conheço seu negócio, seu público e seus objetivos para definir exatamente o que o site precisa entregar.
-          </p>
-        </div>
-        <div class="pers-step">
-          <span class="pers-step-n">Depois</span>
-          <h3>Planejar</h3>
-          <p>
-            Planejo a estrutura, os conteúdos e a experiência de navegação para conduzir o visitante até a ação desejada.
-          </p>
-        </div>
-        <div class="pers-step">
-          <span class="pers-step-n">Então</span>
-          <h3>Executar</h3>
-          <p>
-            Transformo a estratégia em um site exclusivo, desenvolvido do zero para representar sua marca e gerar oportunidades reais de negócio.
-          </p>
-        </div>
-      </div>
+
     </div>
-  </div>
-</section>
 
-<!-- DIFERENCIAIS -->
-<section id="diferenciais">
-  <div class="wrap">
-    <div class="dif reveal">
-      <div class="dif-inner">
+    <!-- Diferenciais: tira de reforço -->
+    <ul class="proc-reinforce reveal">
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        <span>Estratégia antes do design</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></svg>
+        <span>Direto comigo, sem intermediários</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        <span>Feito para ser encontrado no Google</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg>
+        <span>Preparado para evoluir com dados</span>
+      </li>
+    </ul>
 
-        <span class="eyebrow">Meu compromisso com cada projeto</span>
-
-        <h2>
-          Mais do que um desenvolvedor, o
-          <em>condutor do seu projeto</em>
-        </h2>
-
-        <div class="dif-grid">
-
-          <div class="dif-item">
-            <div class="dif-mark">
-              <svg class="dif-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"/>
-                <circle cx="12" cy="12" r="6"/>
-                <circle cx="12" cy="12" r="2"/>
-              </svg>
-            </div>
-            <h3>Estratégia antes da execução</h3>
-            <p>
-              Antes de definir cores ou layout, definimos o que o site precisa alcançar. Cada decisão é tomada para aproximar o visitante da ação desejada.
-            </p>
-          </div>
-
-          <div class="dif-item">
-            <div class="dif-mark"><svg class="dif-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></svg></div>
-            <h3>Comunicação direta</h3>
-            <p>
-              Sem intermediários, sem ruído na comunicação e sem retrabalho desnecessário.
-            </p>
-          </div>
-
-          <div class="dif-item">
-            <div class="dif-mark"><svg class="dif-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg></div>
-            <h3>Processo claro</h3>
-            <p>
-              Escopo, prazos e entregas definidos desde o início. Você acompanha cada etapa sabendo exatamente o que será entregue.
-            </p>
-          </div>
-
-          <div class="dif-item">
-            <div class="dif-mark"><svg class="dif-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
-            <h3>Evolução contínua</h3>
-            <p>
-              O trabalho não termina quando o site vai ao ar. Ele é entregue preparado para ser acompanhado, otimizado e evoluir com base em dados reais.
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-    </div>
     <p class="plans-help-close">
       Porque um bom projeto não é medido pela quantidade de páginas entregues. <br> É pelos resultados que ele ajuda a gerar.
     </p>
@@ -1041,15 +993,15 @@
 
           <div class="case-metrics">
             <div class="case-metric case-metric-hero">
-              <span class="cm-val">1.1k<small>+</small></span>
+              <span class="cm-val">6.9k<small>+</small></span>
               <span class="cm-label">visitantes</span>
             </div>
             <div class="case-metric">
-              <span class="cm-val">317<small>+</small></span>
+              <span class="cm-val">1.1<small>+</small></span>
               <span class="cm-label">conversas iniciadas</span>
             </div>
             <div class="case-metric">
-              <span class="cm-val">28<small>%</small></span>
+              <span class="cm-val">15<small>%</small></span>
               <span class="cm-label">dos visitantes clicaram para entrar em contato</span>
             </div>
           </div>
@@ -1069,7 +1021,7 @@
         </div>
       </article>
 
-      <!-- CASE 2 -->
+      <!-- CASE 2
       <article class="case case-reverse reveal">
         <div class="case-cover">
           <span class="case-cover-ph">[ capa do projeto — print da tela ]</span>
@@ -1101,7 +1053,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           </a>
         </div>
-      </article>
+      </article> -->
 
       <!-- CASE 3 -->
       <article class="case reveal">
@@ -1113,15 +1065,15 @@
 
           <div class="case-metrics">
             <div class="case-metric case-metric-hero">
-              <span class="cm-val">2.4k<small>+</small></span>
+              <span class="cm-val">281<small>+</small></span>
               <span class="cm-label">visitas</span>
             </div>
             <div class="case-metric">
-              <span class="cm-val">312<small>+</small></span>
+              <span class="cm-val">40<small>+</small></span>
               <span class="cm-label">cliques no checkout</span>
             </div>
             <div class="case-metric">
-              <span class="cm-val">13%</span>
+              <span class="cm-val">14%</span>
               <span class="cm-label">dos visitantes seguiram para a compra</span>
             </div>
           </div>
@@ -1129,11 +1081,9 @@
         <div class="case-body">
           <span class="case-type">Landing Page</span>
           <h3 class="case-title">Template Social Media Pro</h3>
-          <p class="case-desc">O cliente precisava transformar visitantes interessados em compradores do template, eliminando distrações e conduzindo diretamente ao checkout. <br>
-          Desenvolvi uma Landing Page com estrutura orientada à conversão, copy estratégica e um único objetivo: levar o visitante até a compra.
-          </p>
+          <p class="case-desc">O cliente precisava transformar visitantes interessados em compradores do template, eliminando distrações e conduzindo diretamente ao checkout.</p>
           <blockquote class="case-quote">“Organizou tudo o que eu tentava explicar. A página vende sozinha.”<cite>— cliente, criador do template</cite></blockquote>
-          <a href="URL_TEMPLATE_AQUI" class="case-visit" target="_blank" rel="noopener noreferrer">
+          <a href="https://templatesocialmediapro.com.br/" class="case-visit" target="_blank" rel="noopener noreferrer">
             <span>Ver a página no ar</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
           </a>
@@ -1182,58 +1132,6 @@
   </div>
 </section>
 
-<!-- PROCESSO -->
-<section class="proc">
-  <div class="wrap">
-
-    <div class="sec-head reveal">
-      <span class="eyebrow">Como funciona</span>
-
-      <h2>
-        Projetos organizados geram
-        <em>resultados melhores.</em>
-      </h2>
-
-      <p>
-        Antes de desenvolver qualquer página, definimos objetivos, estratégia e entregáveis. Assim, você acompanha todo o processo com clareza e sabe exatamente o que esperar em cada etapa.
-      </p>
-    </div>
-
-    <div class="proc-grid">
-
-      <div class="proc-step reveal">
-        <h3>1. Entender</h3>
-        <p>
-          Conheço seu negócio, seu público e os objetivos do projeto para definir a melhor estratégia.
-        </p>
-      </div>
-
-      <div class="proc-step reveal">
-        <h3>2. Planejar</h3>
-        <p>
-          Organizamos escopo, cronograma e estrutura da página antes do desenvolvimento começar.
-        </p>
-      </div>
-
-      <div class="proc-step reveal">
-        <h3>3. Desenvolver</h3>
-        <p>
-          Transformo a estratégia em um site rápido, responsivo e orientado à conversão.
-        </p>
-      </div>
-
-      <div class="proc-step reveal">
-        <h3>4. Evoluir</h3>
-        <p>
-          Seu site entra no ar com métricas configuradas e preparado para evoluir com base em dados reais.
-        </p>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
 <!-- FAQ -->
 <section id="faq">
   <div class="wrap">
@@ -1241,86 +1139,42 @@
       <div class="reveal">
         <span class="eyebrow">Perguntas frequentes</span>
         <h2 style="font-family:var(--display);font-size:clamp(1.9rem,3.6vw,2.6rem);font-weight:700;letter-spacing:-.02em">Tudo o que você precisa saber antes de iniciar seu projeto</h2>
-        <p style="color:var(--ardosia);margin-top:18px;font-size:1.04rem">Transparência faz parte do processo. Se sua dúvida não estiver aqui, você fala diretamente comigo.</p>
+        <p style="color:var(--ardosia);margin-top:18px;font-size:1.04rem">Transparência faz parte do processo. Se sua dúvida não estiver aqui, fale diretamente comigo.</p>
       </div>
-      <div class="faq-list reveal">
-        <div class="faq-item">
-          <button class="faq-q">O site é meu?</button>
-          <div class="faq-a"><p>Sim. O site pertence à sua empresa. Você mantém o domínio, o conteúdo e os arquivos do projeto, sem ficar preso a um fornecedor.</p></div>
+        <div class="faq-list reveal">
+          <div class="faq-item">
+            <button class="faq-q">Quanto custa e como funciona o pagamento?</button>
+            <div class="faq-a"><p>Cada projeto é sob medida — o investimento depende do escopo, das páginas e das funcionalidades. Os valores apresentados são o ponto de partida de cada tipo de projeto; funcionalidades e páginas extras são orçadas antes de começar, sem surpresas. Normalmente trabalho com uma entrada para iniciar e o restante na entrega.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Em quanto tempo fica pronto?</button>
+            <div class="faq-a"><p>Varia com o tamanho do projeto — uma landing page sai mais rápido que um site institucional completo. Na proposta você já recebe o prazo combinado, sem surpresa depois.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Preciso já ter o conteúdo e as imagens?</button>
+            <div class="faq-a"><p>Não. Podemos começar mesmo que você ainda esteja organizando textos ou imagens. Durante o planejamento identificamos o que já existe e o que será necessário produzir.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Você garante que vou vender mais?</button>
+            <div class="faq-a"><p>Nenhum profissional sério garante vendas, porque elas dependem de oferta, preço, atendimento e tráfego. O que eu entrego é um site desenvolvido seguindo boas práticas de conversão, desempenho e SEO, com métricas para acompanhar os resultados e decidir com base em dados.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">O site é meu?</button>
+            <div class="faq-a"><p>Sim. O site pertence à sua empresa — domínio, conteúdo e arquivos são seus, sem ficar preso a um fornecedor. Se um dia decidir sair, todo o conteúdo continua com você e, se precisar, auxilio na migração.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Consigo editar e ter suporte depois de pronto?</button>
+            <div class="faq-a"><p>Sim. Todo projeto inclui suporte inicial de 30 dias após a publicação. Para acompanhamento contínuo com melhorias e atualizações, ofereço os Planos de Performance — e, se preferir, também faço manutenções pontuais sem mensalidade.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Preciso contratar um plano mensal?</button>
+            <div class="faq-a"><p>Não. O projeto pode ser contratado de forma avulsa. Os planos mensais são opcionais, sem fidelidade, e podem ser assinados, alterados ou cancelados quando fizer sentido para o seu momento.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Você configura domínio e hospedagem?</button>
+            <div class="faq-a"><p>Sim. Cuido da configuração do domínio, hospedagem, certificado SSL e publicação. Se você já tem esses serviços contratados, utilizo a estrutura existente.</p></div>
+          </div>
         </div>
-        <div class="faq-item">
-          <button class="faq-q">Quanto custa um projeto?</button>
-          <div class="faq-a"><p>Cada projeto é desenvolvido sob medida. O investimento depende do escopo, da quantidade de páginas e das funcionalidades necessárias. Antes de qualquer orçamento, conversamos sobre seus objetivos para que você receba uma proposta clara, sem custos escondidos ou surpresas durante o desenvolvimento.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Em quanto tempo fica pronto?</button>
-          <div class="faq-a"><p>Varia com o tamanho do projeto. Uma landing page costuma sair mais rápido que um site institucional completo. Na proposta você já recebe o prazo combinado, sem surpresa depois.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Eu preciso já ter o conteúdo e as imagens?</button>
-          <div class="faq-a"><p>Não. Podemos iniciar o projeto mesmo que você ainda esteja organizando textos ou imagens. Durante o planejamento identificamos o que já existe e o que será necessário produzir.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Você garante que vou vender mais?</button>
-          <div class="faq-a"><p>Nenhum profissional sério pode garantir vendas, porque elas dependem de fatores como oferta, preço, atendimento e tráfego. O que eu entrego é um site desenvolvido seguindo boas práticas de conversão, desempenho e SEO, além de métricas para acompanhar os resultados e tomar decisões com base em dados.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Trabalha com que tipo de negócio?</button>
-          <div class="faq-a"><p>Trabalho principalmente com empresas, prestadores de serviço, profissionais autônomos e infoprodutores que desejam fortalecer sua presença digital e transformar visitantes em oportunidades de negócio.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Consigo editar o site depois de pronto?</button>
-          <div class="faq-a"><p>Sim. Após a entrega trabalho com planos de acompanhamento contínuo, para que você nunca fique na mão. Se preferir, também ofereço serviços de manutenção pontuais, sem mensalidade.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">E o suporte depois que entra no ar?</button>
-          <div class="faq-a"><p>Sim. Todos os projetos incluem suporte inicial de 30 dias após a publicação para garantir que tudo esteja funcionando corretamente. Caso queira um acompanhamento contínuo com melhorias e atualizações, você pode contratar um dos Planos de Performance.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Você configura domínio e hospedagem?</button>
-          <div class="faq-a"><p>Sim. Cuido da configuração do domínio, hospedagem, certificado SSL e publicação do site. Se você já possui esses serviços contratados, utilizo a estrutura existente.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Preciso contratar um plano mensal?</button>
-          <div class="faq-a"><p>Não. O projeto pode ser contratado de forma avulsa. Os planos mensais são opcionais e existem para quem deseja manter o site atualizado, seguro e evoluindo continuamente.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Posso começar sem plano e assinar depois?</button>
-          <div class="faq-a"><p>Sim. Você pode contratar apenas o projeto e assinar um plano quando fizer sentido para o seu momento.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Existe fidelidade? Posso mudar de plano?</button>
-          <div class="faq-a"><p>Não existe fidelidade. Os planos são mensais e podem ser alterados ou cancelados a qualquer momento. A ideia é que você permaneça pelos resultados, não por obrigação contratual.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">O que acontece se eu cancelar?</button>
-          <div class="faq-a"><p>O site sempre pertence a você. Em caso de cancelamento, todo o conteúdo continua sendo seu e, se necessário, auxilio na migração para outro serviço.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Os valores dos projetos são fixos?</button>
-          <div class="faq-a"><p>Os valores apresentados são o investimento inicial para cada tipo de projeto. Funcionalidades específicas, integrações ou páginas adicionais são orçadas separadamente antes do início do desenvolvimento.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Como funciona o pagamento?</button>
-          <div class="faq-a"><p>O pagamento é combinado antes do início do projeto. Normalmente trabalhamos com uma entrada para iniciar o desenvolvimento e o restante na entrega.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Vou acompanhar o projeto?</button>
-          <div class="faq-a"><p>Sim. Você acompanha todas as etapas e fala diretamente comigo durante o desenvolvimento. Assim, decisões são tomadas com rapidez e o projeto permanece alinhado aos seus objetivos.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">O site funciona no celular?</button>
-          <div class="faq-a"><p>Sim. Todos os projetos são desenvolvidos com design responsivo, garantindo uma boa experiência em celulares, tablets e computadores.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">O site será encontrado no Google?</button>
-          <div class="faq-a"><p>Todos os projetos já incluem uma estrutura técnica preparada para SEO, aumentando as chances de indexação e visibilidade nas pesquisas. O posicionamento depende de diversos fatores e é construído ao longo do tempo.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Ainda ficou alguma dúvida?</button>
-          <div class="faq-a"><p>Cada projeto é diferente. Se sua dúvida não apareceu aqui, basta entrar em contato. Você conversa diretamente comigo e recebe uma orientação sem compromisso, antes de qualquer decisão.</p></div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
