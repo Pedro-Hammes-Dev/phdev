@@ -404,6 +404,15 @@
   .sobre-photo .mono{font-family:var(--display);font-weight:700;font-size:6rem;color:rgba(255,255,255,.9);letter-spacing:-.05em}
   .sobre-photo .ph-note{position:absolute;bottom:22px;font-family:var(--body);font-size:.78rem;color:rgba(255,255,255,.6)}
   .sobre-photo::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,.16),transparent 60%)}
+  .sobre-photo img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+  display:block;
+}
   .sobre-name{font-family:var(--script);font-size:2.6rem;color:var(--indigo);line-height:1;margin-bottom:6px}
   .sobre-role{font-family:var(--display);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ardosia);margin-bottom:26px}
   .sobre-grid p{color:var(--ardosia);font-size:1.08rem;margin-bottom:18px}
@@ -1106,23 +1115,17 @@
   <div class="wrap">
     <div class="sobre-grid">
       <div class="sobre-photo reveal">
-        <span class="mono">ph</span>
-        <span class="ph-note">substituir pela foto do Pedro</span>
+        <img src="./img/phperfil.JPG" alt="Pedro Hammes, desenvolvedor full stack e fundador da phdev">
       </div>
       <div class="reveal">
         <span class="eyebrow">Quem está por trás dos projetos</span>
         <div class="sobre-name">Pedro Hammes</div>
-        <div class="sobre-role">Desenvolvedor Web • Fundador da phdev</div>
+        <div class="sobre-role">Desenvolvedor Full Stack • Fundador da phdev</div>
         <p>
-          Acredito que bons projetos começam com boas conversas. Antes de escrever qualquer linha de código, procuro entender seu negócio, seus objetivos e como o site pode contribuir para eles.
+          No dia a dia, construo e mantenho um sistema de gestão escolar em produção: o tipo de trabalho que exige que as coisas <em>funcionem</em>, todos os dias, para pessoas reais.
         </p>
-
         <p>
-          Você acompanha todo o projeto falando diretamente comigo, do planejamento à entrega. Isso garante uma comunicação clara, decisões mais rápidas e um desenvolvimento alinhado aos objetivos do seu negócio.
-        </p>
-
-        <p>
-          Meu trabalho termina quando o site é publicado. Meu objetivo começa quando ele passa a gerar resultados para o seu negócio.
+          Isso significa que seu projeto não é um template revendido. É construído do zero, com código próprio, pensado para carregar rápido, aparecer no Google e conduzir o visitante até o contato.
         </p>
         <div class="hero-actions" style="margin-top:28px">
           <a href="#contato" class="btn btn-primary">Vamos conversar sobre o seu projeto<span class="btn-arrow">→</span></a>
